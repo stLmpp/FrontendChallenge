@@ -55,7 +55,20 @@ export class TeamCrudComponent {
     this.firstInput.nativeElement.focus();
   }
 
-  private _update(): void {}
+  private _update(): void {
+    const team = this._team;
+    if (!team) {
+      return;
+    }
+    const formValue: Omit<Team, 'id'> = this.form.value;
+    this.teamService.update(team.id, formValue);
+    this.matSnackBar
+      .open('Team updated successfully!', 'Show')
+      .onAction()
+      .subscribe(() => {
+        this.snackbarShow.emit({ ...team, ...formValue });
+      });
+  }
 
   onSave(): void {
     if (this.form.invalid) {
