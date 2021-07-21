@@ -8,10 +8,18 @@ import { HeaderModule } from './header/header.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatFormFieldDefaultOptions } from '@angular/material/form-field/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { StoresModule } from './store/stores.module';
+import { TeamService } from './services/team.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HeaderModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HeaderModule,
+    StoresModule.forRoot([TeamService]),
+  ],
   bootstrap: [AppComponent],
   providers: [
     {

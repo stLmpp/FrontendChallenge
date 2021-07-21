@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, pluck } from 'rxjs';
-import { isFunction } from '../../utils/utils';
+import { isFunction } from '../utils/utils';
 import { Stores } from './stores';
 
 /**

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TeamService } from '../team.service';
+import { TeamService } from '../../services/team.service';
 import { map, switchMap } from 'rxjs';
 import { RouteParamEnum } from '../../models/route-param.enum';
 import { filterNil } from '../../utils/operators/filter-nil';

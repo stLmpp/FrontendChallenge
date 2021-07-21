@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Store } from '../shared/store/store';
+import { Store } from '../store/store';
 import { Team } from '../models/team';
-import { Stores } from '../shared/store/stores';
+import { Stores } from '../store/stores';
 import { map, Observable } from 'rxjs';
 
 export interface TeamState {
   teams: Team[];
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TeamService extends Store<TeamState> {
   constructor(stores: Stores) {
     super(stores, 'team', { teams: [] });

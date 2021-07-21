@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { isObject } from '../../utils/utils';
+import { isObject } from '../utils/utils';
 import { Store } from './store';
 
 /**
  * @description Service to store all the Stores
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class Stores {
   private _stores = new Map<string, Store<any>>();
 
