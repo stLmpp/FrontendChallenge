@@ -1,0 +1,7 @@
+<ng-container *ngIf="{ team: team$ | async } as state">
+  <app-team-crud *ngIf="state.team; else teamNotFound" [mode]="teamCrudMode.edit" [team]="state.team"></app-team-crud>
+  <ng-template #teamNotFound>
+    <p>Team not found</p>
+    <a mat-raised-button color="primary" routerLink="../../add">Add team</a>
+  </ng-template>
+</ng-container>

@@ -7,11 +7,8 @@ header {
 }
 
 main {
-  margin-top: 64px;
+  padding: calc(64px + 1rem) 1rem 1rem;
   @media screen and (max-width: 599px) {
-    margin-top: 56px;
+    padding-top: calc(56px + 1rem);
   }
-
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
