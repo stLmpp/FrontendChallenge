@@ -38,7 +38,8 @@ export class Stores {
   toJSON(): string {
     const object: Record<string, any> = {};
     for (const [name, store] of this._stores) {
-      object[name] = store.get();
+      object[name] = store.getState();
+      object[name].__uid = store.currentUid();
     }
     return JSON.stringify(object);
   }
@@ -73,14 +74,15 @@ export class Stores {
       if (!store) {
         continue;
       }
-      store.set(state);
+      store.setState(state);
+      store.setUid(state.__uid ?? 1);
     }
     return this;
   }
 
   reset(): this {
     for (const [, store] of this._stores) {
-      store.reset();
+      store.resetState();
     }
     return this;
   }

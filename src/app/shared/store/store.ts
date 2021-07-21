@@ -14,6 +14,7 @@ export abstract class Store<T extends Record<any, any>> {
   }
 
   private readonly _state$: BehaviorSubject<T>;
+  private _uid = 1;
 
   readonly state$: Observable<T>;
 
@@ -22,7 +23,7 @@ export abstract class Store<T extends Record<any, any>> {
    * @param {T} state
    * @returns {this}
    */
-  set(state: T): this {
+  setState(state: T): this {
     this._state$.next(state);
     return this;
   }
@@ -32,7 +33,7 @@ export abstract class Store<T extends Record<any, any>> {
    * @param {Partial<T> | ((oldState: T) => T)} partial
    * @returns {this}
    */
-  update(partial: Partial<T> | ((oldState: T) => T)): this {
+  updateState(partial: Partial<T> | ((oldState: T) => T)): this {
     const state = { ...this._state$.value };
     const update = isFunction(partial) ? partial : (oldState: T) => ({ ...oldState, ...partial });
     this._state$.next(update(state));
@@ -43,14 +44,14 @@ export abstract class Store<T extends Record<any, any>> {
    * @description Select the complete state
    * @returns {Observable<T>}
    */
-  select(): Observable<T>;
+  selectState(): Observable<T>;
   /**
    * @description Select the state partially
    * @param {K} key
    * @returns {Observable<T[K]>}
    */
-  select<K extends keyof T>(key: K): Observable<T[K]>;
-  select<K extends keyof T>(key?: K): Observable<T> | Observable<T[K]> {
+  selectState<K extends keyof T>(key: K): Observable<T[K]>;
+  selectState<K extends keyof T>(key?: K): Observable<T> | Observable<T[K]> {
     if (key) {
       return this.state$.pipe(pluck(key));
     }
@@ -61,14 +62,14 @@ export abstract class Store<T extends Record<any, any>> {
    * @description Get a snapshot of the state
    * @returns {T}
    */
-  get(): T;
+  getState(): T;
   /**
    * @description Get a partial snapshot of the state
    * @param {K} key
    * @returns {T[K]}
    */
-  get<K extends keyof T>(key: K): T[K];
-  get<K extends keyof T>(key?: K): T | T[K] {
+  getState<K extends keyof T>(key: K): T[K];
+  getState<K extends keyof T>(key?: K): T | T[K] {
     const state = { ...this._state$.value };
     if (key) {
       return state[key];
@@ -77,10 +78,36 @@ export abstract class Store<T extends Record<any, any>> {
   }
 
   /**
+   * @description Get the current unique ID
+   * @returns {number}
+   */
+  currentUid(): number {
+    return this._uid;
+  }
+
+  /**
+   * @description Get a unique ID for the store
+   * @returns {number}
+   */
+  nextUid(): number {
+    return this._uid++;
+  }
+
+  /**
+   * @description Used by the Stores to set the initial uid
+   * @param {number} uid
+   * @returns {this}
+   */
+  setUid(uid: number): this {
+    this._uid = uid;
+    return this;
+  }
+
+  /**
    * @description Reset the state to its initial value
    * @returns {this}
    */
-  reset(): this {
-    return this.set(this.initialState);
+  resetState(): this {
+    return this.setState(this.initialState);
   }
 }
