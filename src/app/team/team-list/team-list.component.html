@@ -6,6 +6,9 @@
       <mat-icon matPrefix>search</mat-icon>
       <input matInput [formControl]="termControl" />
     </mat-form-field>
+    <div>
+      <a mat-raised-button color="primary" routerLink="../add">Add new team</a>
+    </div>
     <mat-nav-list>
       <ng-container *ngFor="let team of teams; trackBy: trackById">
         <a mat-list-item [routerLink]="['../', team.id]">
