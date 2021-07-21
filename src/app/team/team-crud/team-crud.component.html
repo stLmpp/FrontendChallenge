@@ -4,6 +4,7 @@
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" #firstInput />
+      <mat-error *ngIf="nameControl.touched && nameControl.invalid"> Name is required </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Sub title</mat-label>
@@ -20,6 +21,7 @@
     <mat-form-field class="description">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description" [matTextareaAutosize]="true" [matAutosizeMinRows]="3"></textarea>
+      <mat-error *ngIf="descriptionControl.touched && descriptionControl.invalid"> Description is required </mat-error>
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>

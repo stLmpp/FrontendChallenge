@@ -32,15 +32,16 @@ export class TeamCrudComponent {
     this._team = team;
   }
 
-  form = new FormGroup({
+  readonly form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     subTitle: new FormControl(),
     description: new FormControl('', [Validators.required]),
     logo: new FormControl(),
     image: new FormControl(),
   });
-
   readonly teamCrudMode = TeamCrudMode;
+  readonly nameControl = this.form.get('name') as FormControl;
+  readonly descriptionControl = this.form.get('description') as FormControl;
 
   private _add(): void {
     const formValue: Omit<Team, 'id'> = this.form.value;
