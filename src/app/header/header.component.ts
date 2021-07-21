@@ -18,8 +18,8 @@ export class HeaderComponent {
     this.stores.fromJSON(
       JSON.stringify({
         team: {
-          json: '{"teams":[{"name":"Team 1","subTitle":"Best team","description":"teamte teamtemteamt etamt aemt taemtae ","id":1}]}',
-          uid: 2,
+          json: '{"teams":[{"name":"Team 1","subTitle":"Best team","description":"teamte teamtemteamt etamt aemt taemtae ","id":1},{"name":"Team 2","subTitle":"Team 2","description":"Team 2","id":1},{"name":"Team 3","subTitle":"Team 3","description":"Team 3","id":2}]}',
+          uid: 3,
         },
         tournament: { json: '{"tournaments":[]}', uid: 1 },
       })
