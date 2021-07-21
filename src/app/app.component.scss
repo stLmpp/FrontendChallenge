@@ -1,0 +1,17 @@
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+main {
+  margin-top: 64px;
+  @media screen and (max-width: 599px) {
+    margin-top: 56px;
+  }
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
