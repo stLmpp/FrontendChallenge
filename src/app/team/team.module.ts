@@ -8,26 +8,29 @@ import { TeamEditComponent } from './team-edit/team-edit.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TeamComponent } from './team/team.component';
+import { TeamComponent } from './team.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TeamListComponent } from './team-list/team-list.component';
+import { MatListModule } from '@angular/material/list';
+import { DialogModule } from '../dialog/dialog.module';
 
 @NgModule({
-  declarations: [TeamCrudComponent, TeamAddComponent, TeamEditComponent, TeamComponent],
+  declarations: [TeamCrudComponent, TeamAddComponent, TeamEditComponent, TeamComponent, TeamListComponent],
   imports: [
     CommonModule,
     TeamRoutingModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     MatIconModule,
     MatTooltipModule,
+    MatListModule,
+    DialogModule,
   ],
 })
 export class TeamModule {}

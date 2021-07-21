@@ -1,0 +1,14 @@
+<ng-container *ngIf="teams$ | async as teams">
+  <p *ngIf="!teams?.length">No teams found</p>
+  <mat-nav-list>
+    <ng-container *ngFor="let team of teams; trackBy: trackById">
+      <a mat-list-item [routerLink]="['../', team.id]">
+        <div matLine>{{ team.name }}</div>
+        <button mat-icon-button type="button" (click)="onDelete($event, team)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </a>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-nav-list>
+</ng-container>

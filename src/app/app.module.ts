@@ -10,6 +10,8 @@ import { MatFormFieldDefaultOptions } from '@angular/material/form-field/form-fi
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { StoresModule } from './store/stores.module';
 import { TeamService } from './services/team.service';
+import { TournamentService } from './services/tournament.service';
+import { DialogModule } from './dialog/dialog.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +20,8 @@ import { TeamService } from './services/team.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HeaderModule,
-    StoresModule.forRoot([TeamService]),
+    StoresModule.forRoot([TeamService, TournamentService]),
+    DialogModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [

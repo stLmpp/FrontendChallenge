@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TeamService } from '../../services/team.service';
+import { TeamService } from '../services/team.service';
 import { map, switchMap, tap } from 'rxjs';
-import { RouteParamEnum } from '../../models/route-param.enum';
-import { filterNil } from '../../utils/operators/filter-nil';
+import { RouteParamEnum } from '../models/route-param.enum';
+import { filterNil } from '../utils/operators/filter-nil';
 
 @Component({
   selector: 'app-team',

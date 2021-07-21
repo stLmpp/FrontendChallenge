@@ -32,8 +32,12 @@ export class TeamService extends Store<TeamState> {
     return team;
   }
 
-  update(id: number, partial: Partial<Team>): void {
-    this._updateTeam(id, partial);
+  update(idTeam: number, partial: Partial<Team>): void {
+    this._updateTeam(idTeam, partial);
+  }
+
+  delete(idTeam: number): void {
+    this.updateState(state => ({ ...state, teams: state.teams.filter(team => team.id !== idTeam) }));
   }
 
   selectTeam(idTeam: number): Observable<Team | undefined> {

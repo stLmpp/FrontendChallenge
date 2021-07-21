@@ -110,4 +110,12 @@ export abstract class Store<T extends Record<any, any>> {
   resetState(): this {
     return this.setState(this.initialState);
   }
+
+  /**
+   * @description Convert the store to json
+   * @returns {string}
+   */
+  toJSON(): string {
+    return JSON.stringify(this.getState());
+  }
 }

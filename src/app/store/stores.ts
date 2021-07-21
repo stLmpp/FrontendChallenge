@@ -20,7 +20,7 @@ export class Stores {
 
   /**
    * @description
-   * @param {Store<any>} store
+   * @param {Store} store
    * @returns {this}
    */
   add(store: Store<any>): this {
@@ -38,8 +38,7 @@ export class Stores {
   toJSON(): string {
     const object: Record<string, any> = {};
     for (const [name, store] of this._stores) {
-      object[name] = store.getState();
-      object[name].__uid = store.currentUid();
+      object[name] = { json: store.toJSON(), uid: store.currentUid() };
     }
     return JSON.stringify(object);
   }
@@ -74,8 +73,16 @@ export class Stores {
       if (!store) {
         continue;
       }
-      store.setState(state);
-      store.setUid(state.__uid ?? 1);
+      try {
+        store.setState(JSON.parse(state.json));
+        store.setUid(state.__uid ?? 1);
+      } catch {
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+          // Only log if in development (ng serve)
+          // eslint-disable-next-line no-console
+          console.error(`Invalid JSON for the store ${store.name}`);
+        }
+      }
     }
     return this;
   }
