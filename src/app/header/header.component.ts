@@ -14,7 +14,25 @@ export class HeaderComponent {
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private document: Document,
     private renderer2: Renderer2
-  ) {}
+  ) {
+    this.stores.fromJSON(
+      JSON.stringify({
+        team: {
+          teams: [
+            {
+              name: 'Team 1',
+              subTitle: 'Best team',
+              description: 'Team team team team team team team team',
+              logo: 'a',
+              image: 'a',
+              id: 1,
+            },
+          ],
+          __uid: 2,
+        },
+      })
+    );
+  }
 
   loading = false;
 

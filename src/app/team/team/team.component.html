@@ -6,11 +6,28 @@
   <div class="card-container" *ngIf="state.team as team; else teamNotFound">
     <mat-card>
       <mat-card-header>
-        <img mat-card-avatar src="/assets/teams/{{ team.logo }}" [alt]="team.name" />
+        <img
+          *ngIf="!logoError; else logoErrorTemplate"
+          mat-card-avatar
+          src="/assets/teams/{{ team.name }}-logo"
+          [alt]="team.name"
+          (error)="logoError = true"
+        />
+        <ng-template #logoErrorTemplate>
+          <div mat-card-avatar matTooltip="Broken logo" matTooltipPosition="left">
+            <mat-icon>broken_image</mat-icon>
+          </div>
+        </ng-template>
         <mat-card-title>{{ team.name }}</mat-card-title>
         <mat-card-subtitle>{{ team.subTitle }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="assets/teams/{{ team.image }}" [alt]="team.description" />
+      <img
+        *ngIf="!imageError"
+        mat-card-image
+        src="assets/teams/{{ team.name }}-logo"
+        [alt]="team.description"
+        (error)="imageError = true"
+      />
       <mat-card-content>
         <p>
           {{ team.description }}

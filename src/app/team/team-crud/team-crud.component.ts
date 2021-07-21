@@ -36,8 +36,6 @@ export class TeamCrudComponent {
     name: new FormControl('', [Validators.required]),
     subTitle: new FormControl(),
     description: new FormControl('', [Validators.required]),
-    logo: new FormControl(),
-    image: new FormControl(),
   });
   readonly teamCrudMode = TeamCrudMode;
   readonly nameControl = this.form.get('name') as FormControl;

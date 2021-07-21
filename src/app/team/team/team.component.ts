@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../../services/team.service';
-import { map, switchMap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import { RouteParamEnum } from '../../models/route-param.enum';
 import { filterNil } from '../../utils/operators/filter-nil';
 
@@ -12,11 +12,23 @@ import { filterNil } from '../../utils/operators/filter-nil';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamComponent {
-  constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private teamService: TeamService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  logoError = false;
+  imageError = false;
 
   team$ = this.activatedRoute.paramMap.pipe(
     map(paramMap => paramMap.get(RouteParamEnum.idTeam)),
     filterNil(),
-    switchMap(idTeam => this.teamService.selectTeam(+idTeam))
+    switchMap(idTeam => this.teamService.selectTeam(+idTeam)),
+    tap(() => {
+      this.logoError = false;
+      this.imageError = false;
+      this.changeDetectorRef.markForCheck();
+    })
   );
 }

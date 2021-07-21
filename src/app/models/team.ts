@@ -3,6 +3,4 @@ export interface Team {
   name: string;
   subTitle?: string;
   description: string;
-  logo?: string;
-  image?: string;
 }

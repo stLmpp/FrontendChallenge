@@ -7,3 +7,10 @@
   max-width: 400px;
   min-width: 400px;
 }
+
+.mat-card-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparentize(black, 0.75);
+}
