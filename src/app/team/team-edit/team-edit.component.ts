@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../../services/team.service';
 import { map, switchMap } from 'rxjs';
 import { RouteParamEnum } from '../../models/route-param.enum';
@@ -13,7 +13,7 @@ import { TeamCrudMode } from '../team-crud/team-crud.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamEditComponent {
-  constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService) {}
+  constructor(private activatedRoute: ActivatedRoute, private teamService: TeamService, private router: Router) {}
 
   readonly team$ = this.activatedRoute.paramMap.pipe(
     map(paramMap => paramMap.get(RouteParamEnum.idTeam)),
@@ -22,4 +22,8 @@ export class TeamEditComponent {
   );
 
   readonly teamCrudMode = TeamCrudMode;
+
+  onSnackBarShow(): void {
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute }).then();
+  }
 }

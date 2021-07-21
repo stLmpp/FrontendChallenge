@@ -1,1 +1,24 @@
-<p>team works!</p>
+<ng-container *ngIf="{ team: team$ | async } as state">
+  <ng-template #teamNotFound>
+    <p>Team not found</p>
+    <a mat-raised-button color="primary" routerLink="../add">Add team</a>
+  </ng-template>
+  <div class="card-container" *ngIf="state.team as team; else teamNotFound">
+    <mat-card>
+      <mat-card-header>
+        <img mat-card-avatar src="/assets/teams/{{ team.logo }}" [alt]="team.name" />
+        <mat-card-title>{{ team.name }}</mat-card-title>
+        <mat-card-subtitle>{{ team.subTitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="assets/teams/{{ team.image }}" [alt]="team.description" />
+      <mat-card-content>
+        <p>
+          {{ team.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button routerLink="edit">Edit</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-container>
