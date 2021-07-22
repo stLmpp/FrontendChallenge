@@ -1,7 +1,14 @@
-import { Team } from './team';
+import { GameWithTeams } from './game';
+import { TournamentTeam } from './tournament-team';
 
 export interface Tournament {
   id: number;
   name: string;
-  teams: Team[];
+  idTeams: number[];
+  idGames: number[];
+}
+
+export interface TournamentWithTeamsGames extends Tournament {
+  teams: TournamentTeam[];
+  games: GameWithTeams[];
 }

@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TournamentAddComponent } from './tournament-add/tournament-add.component';
 import { RouteParamEnum } from '../models/route-param.enum';
+import { TournamentComponent } from './tournament.component';
+import { TournamentGuard } from './tournament.guard';
 
 const routes: Routes = [
   {
-    path: 'add',
-    component: TournamentAddComponent,
-  },
-  {
     path: `:${RouteParamEnum.idTournament}`,
+    component: TournamentComponent,
+    canActivate: [TournamentGuard],
   },
 ];
 

@@ -12,6 +12,7 @@ import { StoresModule } from './store/stores.module';
 import { TeamService } from './services/team.service';
 import { TournamentService } from './services/tournament.service';
 import { DialogModule } from './dialog/dialog.module';
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { DialogModule } from './dialog/dialog.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HeaderModule,
-    StoresModule.forRoot([TeamService, TournamentService]),
+    StoresModule.forRoot([TeamService, TournamentService, GameService]),
     DialogModule.forRoot(),
   ],
   bootstrap: [AppComponent],

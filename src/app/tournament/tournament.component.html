@@ -1,1 +1,21 @@
-<p>tournament works!</p>
+<ng-container *ngIf="tournament$ | async as tournament">
+  <mat-form-field>
+    <mat-label>Tournament name</mat-label>
+    <input matInput [ngModel]="tournament.name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Teams</mat-label>
+    <mat-chip-list #teamsChipList>
+      <mat-chip *ngFor="let team of tournament.teams; trackBy: trackById" [removable]="team.removable">
+        {{ team.name }}
+        <mat-icon matChipRemove *ngIf="team.removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <mat-autocomplete autoActiveFirstOption #teamsAutocomplete="matAutocomplete">
+      <mat-option *ngFor="let team of teamsAvailable$ | async; trackBy: trackById" [value]="team.id">
+        {{ team.name }}
+      </mat-option>
+    </mat-autocomplete>
+    <input matInput [matChipInputFor]="teamsChipList" [matAutocomplete]="teamsAutocomplete" />
+  </mat-form-field>
+</ng-container>
