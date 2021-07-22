@@ -9,6 +9,7 @@ import { GameTeamSide } from '../../models/game';
   templateUrl: './tournament-phase-game-team.component.html',
   styleUrls: ['./tournament-phase-game-team.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'tournament-phase-game-team' },
 })
 export class TournamentPhaseGameTeamComponent {
   constructor(private gameService: GameService) {}

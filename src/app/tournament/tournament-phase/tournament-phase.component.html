@@ -1,20 +1,22 @@
 <ng-container *ngFor="let game of phase.games; trackBy: trackById">
-  <app-tournament-phase-game-team
-    [winner]="last"
-    [team]="game.teamA"
-    [idGame]="game.id"
-    [idPhase]="phase.id"
-    [idTournament]="phase.idTournament"
-    [disabled]="!game.teamA || !game.teamB"
-    teamSide="a"
-  ></app-tournament-phase-game-team>
-  <app-tournament-phase-game-team
-    *ngIf="!last"
-    [team]="game.teamB"
-    [idGame]="game.id"
-    [idPhase]="phase.id"
-    [idTournament]="phase.idTournament"
-    [disabled]="!game.teamA || !game.teamB"
-    teamSide="b"
-  ></app-tournament-phase-game-team>
+  <div class="tournament-phase-game">
+    <app-tournament-phase-game-team
+      [winner]="last"
+      [team]="game.teamA"
+      [idGame]="game.id"
+      [idPhase]="phase.id"
+      [idTournament]="phase.idTournament"
+      [disabled]="!game.teamA || !game.teamB"
+      teamSide="a"
+    ></app-tournament-phase-game-team>
+    <app-tournament-phase-game-team
+      *ngIf="!last"
+      [team]="game.teamB"
+      [idGame]="game.id"
+      [idPhase]="phase.id"
+      [idTournament]="phase.idTournament"
+      [disabled]="!game.teamA || !game.teamB"
+      teamSide="b"
+    ></app-tournament-phase-game-team>
+  </div>
 </ng-container>
