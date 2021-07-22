@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Team } from '../../../models/team';
 
 @Component({
@@ -12,6 +20,9 @@ export class TeamMiniCardComponent implements OnChanges {
   @Input() team?: Team;
   @Input() disabled = false;
   @Input() winner = false;
+  @Input() tournamentWinner = false;
+
+  @Output() readonly buttonClick = new EventEmitter<MouseEvent>();
 
   logoError = false;
 

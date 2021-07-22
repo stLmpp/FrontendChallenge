@@ -3,6 +3,7 @@ import { Team } from '../../models/team';
 import { CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { GameService } from '../../services/game.service';
 import { GameTeamSide } from '../../models/game';
+import { PhaseService } from '../../services/phase.service';
 
 @Component({
   selector: 'app-tournament-phase-game-team',
@@ -12,13 +13,14 @@ import { GameTeamSide } from '../../models/game';
   host: { class: 'tournament-phase-game-team' },
 })
 export class TournamentPhaseGameTeamComponent {
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private phaseService: PhaseService) {}
 
   @Input() idTournament!: number;
   @Input() idPhase!: number;
   @Input() idGame!: number;
+  @Input() idTeamWinner?: number;
   @Input() team?: Team;
-  @Input() winner = false;
+  @Input() tournamentWinner = false;
   @Input() teamSide!: GameTeamSide;
   @Input() disabled = false;
 
@@ -35,5 +37,12 @@ export class TournamentPhaseGameTeamComponent {
   onCdkDropListDropped($event: CdkDragDrop<Team, Team>): void {
     this.teamDrag = undefined;
     this.gameService.setTeam(this.idTournament, this.idPhase, this.idGame, $event.item.data.id, this.teamSide);
+  }
+
+  onAdvanceButtonClick(): void {
+    if (!this.team) {
+      return;
+    }
+    this.phaseService.setTeamWinnerAndAdvanceToNextPhase(this.idTournament, this.idPhase, this.idGame, this.team.id);
   }
 }

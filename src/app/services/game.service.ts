@@ -15,6 +15,18 @@ export class GameService extends Store<GameState> {
     super(stores, 'game', { games: [] });
   }
 
+  update(idTournament: number, idPhase: number, idGame: number, partial: Partial<Game>): void {
+    this.updateState(state => ({
+      ...state,
+      games: state.games.map(game => {
+        if (game.idTournament === idTournament && game.idPhase === idPhase && game.id === idGame) {
+          game = { ...game, ...partial };
+        }
+        return game;
+      }),
+    }));
+  }
+
   addMany(dtos: Omit<Game, 'id'>[]): Game[] {
     const games: Game[] = dtos.map(dto => ({ ...dto, id: this.nextUid() }));
     this.updateState(state => ({ ...state, games: [...state.games, ...games] }));
@@ -54,5 +66,9 @@ export class GameService extends Store<GameState> {
         return game;
       }),
     }));
+  }
+
+  getGamesByIdPhase(idTournament: number, idPhase: number): Game[] {
+    return this.getState('games').filter(game => game.idTournament === idTournament && game.idPhase === idPhase);
   }
 }

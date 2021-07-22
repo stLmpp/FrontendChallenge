@@ -24,7 +24,7 @@ export class HeaderComponent {
           uid: 9,
         },
         game: {
-          json: '{"games":[{"idTournament":1,"idPhase":1,"id":1},{"idTournament":1,"idPhase":1,"id":2},{"idTournament":1,"idPhase":1,"id":3},{"idTournament":1,"idPhase":1,"id":4},{"idTournament":1,"idPhase":2,"id":5},{"idTournament":1,"idPhase":2,"id":6},{"idTournament":1,"idPhase":3,"id":7},{"idTournament":1,"idPhase":4,"id":8},{"idTournament":2,"idPhase":5,"id":9,"idTeamA":1,"idTeamB":2},{"idTournament":2,"idPhase":5,"id":10,"idTeamA":3,"idTeamB":4},{"idTournament":2,"idPhase":6,"id":11}]}',
+          json: '{"games":[{"idTournament":1,"idPhase":1,"id":1,"idTeamA":1,"idTeamB":2},{"idTournament":1,"idPhase":1,"id":2,"idTeamA":3,"idTeamB":4},{"idTournament":1,"idPhase":1,"id":3,"idTeamA":5,"idTeamB":6},{"idTournament":1,"idPhase":1,"id":4,"idTeamA":7,"idTeamB":8},{"idTournament":1,"idPhase":2,"id":5},{"idTournament":1,"idPhase":2,"id":6},{"idTournament":1,"idPhase":3,"id":7},{"idTournament":1,"idPhase":4,"id":8},{"idTournament":2,"idPhase":5,"id":9,"idTeamA":1,"idTeamB":2},{"idTournament":2,"idPhase":5,"id":10,"idTeamA":3,"idTeamB":4},{"idTournament":2,"idPhase":6,"id":11}]}',
           uid: 12,
         },
         phase: {

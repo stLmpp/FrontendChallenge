@@ -11,15 +11,19 @@
       <mat-icon *ngIf="team">broken_image</mat-icon>
     </div>
   </ng-template>
-  <div class="name" [matTooltip]="team?.name ?? ''" matTooltipPosition="right" [matTooltipDisabled]="!team">
+  <div class="name" [matTooltip]="team?.name ?? ''" matTooltipPosition="above" [matTooltipDisabled]="!team">
     {{ team?.name }}
   </div>
 </div>
 <div class="advance-button" [class.disabled]="!team || disabled">
-  <button mat-icon-button [disabled]="!team || disabled" *ngIf="!winner; else winnerTemplate">
+  <button
+    mat-icon-button
+    [disabled]="!team || disabled"
+    *ngIf="!tournamentWinner && !winner"
+    (click)="buttonClick.emit($event)"
+  >
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>
-  <ng-template #winnerTemplate>
-    <mat-icon>emoji_events</mat-icon>
-  </ng-template>
+  <mat-icon *ngIf="tournamentWinner" matTooltip="Tournament winner" matTooltipPosition="above">emoji_events</mat-icon>
+  <mat-icon *ngIf="winner" matTooltip="Winner" matTooltipPosition="above">military_tech</mat-icon>
 </div>

@@ -1,3 +1,4 @@
+{{ tournament$ | async | json }}
 <ng-container *ngIf="tournament$ | async as tournament">
   <mat-form-field>
     <mat-label>Tournament name</mat-label>

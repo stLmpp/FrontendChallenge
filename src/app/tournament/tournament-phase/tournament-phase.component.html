@@ -1,12 +1,13 @@
 <ng-container *ngFor="let game of phase.games; trackBy: trackById">
   <div class="tournament-phase-game">
     <app-tournament-phase-game-team
-      [winner]="last"
+      [tournamentWinner]="last"
       [team]="game.teamA"
       [idGame]="game.id"
       [idPhase]="phase.id"
       [idTournament]="phase.idTournament"
-      [disabled]="!game.teamA || !game.teamB"
+      [disabled]="!game.teamA || !game.teamB || !!game.winner"
+      [idTeamWinner]="game.winner"
       teamSide="a"
     ></app-tournament-phase-game-team>
     <app-tournament-phase-game-team
@@ -15,7 +16,8 @@
       [idGame]="game.id"
       [idPhase]="phase.id"
       [idTournament]="phase.idTournament"
-      [disabled]="!game.teamA || !game.teamB"
+      [disabled]="!game.teamA || !game.teamB || !!game.winner"
+      [idTeamWinner]="game.winner"
       teamSide="b"
     ></app-tournament-phase-game-team>
   </div>
