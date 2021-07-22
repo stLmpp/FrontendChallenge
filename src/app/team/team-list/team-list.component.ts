@@ -21,7 +21,7 @@ export class TeamListComponent {
   readonly trackById = trackById;
   readonly termControl = new FormControl('');
   readonly term$: Observable<string> = this.termControl.valueChanges.pipe(debounceTime(350), startWith(''));
-  readonly teams$ = combineLatest([this.teamService.selectState('teams'), this.term$]).pipe(
+  readonly teams$: Observable<Team[]> = combineLatest([this.teamService.selectState('teams'), this.term$]).pipe(
     map(([teams, term]) => search(teams, 'name', term))
   );
 
