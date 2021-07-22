@@ -1,7 +1,12 @@
 <ng-container *ngIf="tournament$ | async as tournament">
   <mat-form-field>
     <mat-label>Tournament name</mat-label>
-    <input matInput [ngModel]="tournament.name" />
+    <input
+      matInput
+      [ngModel]="tournament.name"
+      (ngModelChange)="onNameChange(tournament.id, $event)"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+    />
   </mat-form-field>
   <app-tournament-teams
     *ngIf="teamsAvailable$ | async as teamsAvailable"

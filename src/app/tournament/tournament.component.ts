@@ -28,4 +28,8 @@ export class TournamentComponent {
   readonly teamsAvailable$ = this._idTournament$.pipe(
     switchMap(idTournament => this.tournamentService.selectTeamsAvailable(idTournament))
   );
+
+  onNameChange(idTournament: number, name: string): void {
+    this.tournamentService.update(idTournament, { name });
+  }
 }

@@ -21,10 +21,10 @@ export class HeaderComponent {
       JSON.stringify({
         team: {
           json: '{"teams":[{"name":"Team Logi","subTitle":"Team 1","description":"Team 1","id":1},{"name":"Team 2","subTitle":"Team 2","description":"Team 2","id":2},{"name":"Team 3","subTitle":"Team 3","description":"Team 3","id":3}]}',
-          uid: 4,
+          uid: 1,
         },
         game: { json: '{"games":[]}', uid: 1 },
-        tournament: { json: '{"tournaments":[]}', uid: 1 },
+        tournament: { json: '{"tournaments":[{"name":"teste","id":1,"idTeams":[1,2],"idGames":[]}]}', uid: 2 },
       })
     );
   }
