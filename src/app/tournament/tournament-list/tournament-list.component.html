@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <div mat-subheader>Tournaments</div>
+  <ng-container *ngFor="let tournament of tournaments$ | async; trackBy: trackById">
+    <a mat-list-item [routerLink]="['../', tournament.id]">
+      <div mat-line>
+        {{ tournament.name }}
+      </div>
+      <mat-icon> arrow_forward_ios </mat-icon>
+    </a>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-nav-list>

@@ -17,9 +17,17 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TeamSharedModule } from '../team/team-shared/team-shared.module';
 import { TournamentPhaseComponent } from './tournament-phase/tournament-phase.component';
 import { TournamentPhaseGameTeamComponent } from './tournament-phase-game-team/tournament-phase-game-team.component';
+import { TournamentListComponent } from './tournament-list/tournament-list.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [TournamentComponent, TournamentTeamsComponent, TournamentPhaseComponent, TournamentPhaseGameTeamComponent],
+  declarations: [
+    TournamentComponent,
+    TournamentTeamsComponent,
+    TournamentPhaseComponent,
+    TournamentPhaseGameTeamComponent,
+    TournamentListComponent,
+  ],
   imports: [
     CommonModule,
     TournamentRoutingModule,
@@ -35,6 +43,7 @@ import { TournamentPhaseGameTeamComponent } from './tournament-phase-game-team/t
     ArrayModule,
     DragDropModule,
     TeamSharedModule,
+    MatListModule,
   ],
 })
 export class TournamentModule {}
