@@ -1,14 +1,16 @@
 <mat-form-field>
   <mat-label>Teams</mat-label>
-  <mat-chip-list #teamsChipList>
+  <mat-chip-list #teamsChipList cdkDropList [cdkDropListConnectedTo]="tournament.cdkDropLists" id="tournament-teams">
     <mat-chip
       *ngFor="let team of tournament.teams; trackBy: trackById"
-      [removable]="team.removable"
+      [removable]="!tournament.phases.length"
       (removed)="onTeamRemoved(tournament.id, $event)"
       [value]="team.id"
+      cdkDrag
+      [cdkDragData]="team"
     >
       {{ team.name }}
-      <mat-icon matChipRemove *ngIf="team.removable">cancel</mat-icon>
+      <mat-icon matChipRemove *ngIf="!tournament.phases.length">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
   <mat-autocomplete autoActiveFirstOption #teamsAutocomplete="matAutocomplete">
@@ -25,5 +27,6 @@
     [matChipInputFor]="teamsChipList"
     [matAutocomplete]="teamsAutocomplete"
     (input)="onTeamTermInput($event)"
+    [disabled]="!!tournament.phases.length"
   />
 </mat-form-field>

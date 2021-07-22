@@ -1,0 +1,11 @@
+<app-team-mini-card
+  cdkDropList
+  id="tournament-phase-{{ idPhase }}-game-{{ idGame }}-team-{{ teamSide }}"
+  [team]="team ?? teamDrag"
+  [winner]="winner"
+  [disabled]="disabled"
+  [cdkDropListDisabled]="!!team"
+  (cdkDropListEntered)="onCdkDropListEntered($event)"
+  (cdkDropListExited)="onCdkDropListExited()"
+  (cdkDropListDropped)="onCdkDropListDropped($event)"
+></app-team-mini-card>

@@ -13,9 +13,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { TournamentTeamsComponent } from './tournament-teams/tournament-teams.component';
 import { ArrayModule } from '../shared/array/array.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TeamSharedModule } from '../team/team-shared/team-shared.module';
+import { TournamentPhaseComponent } from './tournament-phase/tournament-phase.component';
+import { TournamentPhaseGameTeamComponent } from './tournament-phase-game-team/tournament-phase-game-team.component';
 
 @NgModule({
-  declarations: [TournamentComponent, TournamentTeamsComponent],
+  declarations: [TournamentComponent, TournamentTeamsComponent, TournamentPhaseComponent, TournamentPhaseGameTeamComponent],
   imports: [
     CommonModule,
     TournamentRoutingModule,
@@ -29,6 +33,8 @@ import { ArrayModule } from '../shared/array/array.module';
     MatOptionModule,
     ReactiveFormsModule,
     ArrayModule,
+    DragDropModule,
+    TeamSharedModule,
   ],
 })
 export class TournamentModule {}

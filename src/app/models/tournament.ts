@@ -1,14 +1,15 @@
-import { GameWithTeams } from './game';
-import { TournamentTeam } from './tournament-team';
+import { PhaseWithGames } from './phase';
+import { Team } from './team';
 
 export interface Tournament {
   id: number;
   name: string;
   idTeams: number[];
-  idGames: number[];
 }
 
-export interface TournamentWithTeamsGames extends Tournament {
-  teams: TournamentTeam[];
-  games: GameWithTeams[];
+export interface TournamentWithTeamsPhases extends Tournament {
+  teams: Team[];
+  phases: PhaseWithGames[];
+  createPhases: boolean;
+  cdkDropLists: string[];
 }

@@ -4,7 +4,8 @@ import { map, Observable, switchMap } from 'rxjs';
 import { RouteParamEnum } from '../models/route-param.enum';
 import { filterNil } from '../utils/operators/filter-nil';
 import { TournamentService } from '../services/tournament.service';
-import { TournamentWithTeamsGames } from '../models/tournament';
+import { TournamentWithTeamsPhases } from '../models/tournament';
+import { trackById } from '../utils/track-by';
 
 @Component({
   selector: 'app-tournament',
@@ -21,7 +22,7 @@ export class TournamentComponent {
     map(Number)
   );
 
-  readonly tournament$: Observable<TournamentWithTeamsGames> = this._idTournament$.pipe(
+  readonly tournament$: Observable<TournamentWithTeamsPhases> = this._idTournament$.pipe(
     switchMap(idTournament => this.tournamentService.selectTournamentWithTeamsOrCreate(idTournament))
   );
 
@@ -29,7 +30,13 @@ export class TournamentComponent {
     switchMap(idTournament => this.tournamentService.selectTeamsAvailable(idTournament))
   );
 
+  readonly trackById = trackById;
+
   onNameChange(idTournament: number, name: string): void {
     this.tournamentService.update(idTournament, { name });
+  }
+
+  createPhases(tournament: TournamentWithTeamsPhases): void {
+    this.tournamentService.createPhases(tournament.id);
   }
 }

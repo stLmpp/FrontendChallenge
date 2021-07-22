@@ -13,3 +13,7 @@ export function isNil(value: any): value is null | undefined {
 export function isNotNil<T>(value: T): value is NonNullable<T> {
   return !isNil(value);
 }
+
+export function resolveUpdate<T>(partial: Partial<T> | ((item: T) => T)): (item: T) => T {
+  return isFunction(partial) ? partial : (item: T) => ({ ...item, ...partial });
+}

@@ -13,4 +13,20 @@
     [teamsAvailable]="teamsAvailable"
     [tournament]="tournament"
   ></app-tournament-teams>
+  <button
+    mat-raised-button
+    type="button"
+    color="primary"
+    (click)="createPhases(tournament)"
+    [disabled]="tournament.createPhases"
+  >
+    Create phases
+  </button>
+  <div class="phases">
+    <app-tournament-phase
+      *ngFor="let phase of tournament.phases; trackBy: trackById; let $last = last"
+      [phase]="phase"
+      [last]="$last"
+    ></app-tournament-phase>
+  </div>
 </ng-container>

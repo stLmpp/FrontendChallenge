@@ -74,8 +74,8 @@ export class Stores {
         continue;
       }
       try {
-        store.setState(JSON.parse(state.json));
-        store.setUid(state.__uid ?? 1);
+        store.fromJSON(state.json);
+        store.setUid(state.uid ?? 1);
       } catch {
         if (typeof ngDevMode === 'undefined' || ngDevMode) {
           // Only log if in development (ng serve)

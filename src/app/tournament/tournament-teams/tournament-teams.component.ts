@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TournamentWithTeamsGames } from '../../models/tournament';
+import { TournamentWithTeamsPhases } from '../../models/tournament';
 import { trackById } from '../../utils/track-by';
 import { Team } from '../../models/team';
 import { MatOptionSelectionChange } from '@angular/material/core';
@@ -18,7 +18,7 @@ export class TournamentTeamsComponent {
 
   private readonly _teamTerm$ = new BehaviorSubject('');
 
-  @Input() tournament!: TournamentWithTeamsGames;
+  @Input() tournament!: TournamentWithTeamsPhases;
   @Input() teamsAvailable!: Team[];
 
   readonly teamTerm$ = this._teamTerm$.pipe(debounceTime(350));

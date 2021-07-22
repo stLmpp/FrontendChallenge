@@ -9,12 +9,12 @@
         <img
           *ngIf="!logoError; else logoErrorTemplate"
           mat-card-avatar
-          src="/assets/teams/{{ team.name }}-logo"
+          src="/assets/teams/{{ team.name }}/logo.png"
           [alt]="team.name"
           (error)="logoError = true"
         />
         <ng-template #logoErrorTemplate>
-          <div mat-card-avatar matTooltip="Broken logo" matTooltipPosition="left">
+          <div class="no-logo" mat-card-avatar matTooltip="Broken logo" matTooltipPosition="left">
             <mat-icon>broken_image</mat-icon>
           </div>
         </ng-template>
@@ -24,7 +24,7 @@
       <img
         *ngIf="!imageError"
         mat-card-image
-        src="assets/teams/{{ team.name }}-logo"
+        src="assets/teams/{{ team.name }}/image.png"
         [alt]="team.description"
         (error)="imageError = true"
       />

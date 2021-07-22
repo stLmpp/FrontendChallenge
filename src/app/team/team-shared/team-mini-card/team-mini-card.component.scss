@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use 'variables' as v;
+
+:host {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: map.get(v.$primary, 50);
+  padding: 0.25rem 0.5rem;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  margin-right: 0.25rem;
+  border: 1px solid transparent;
+  &.no-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: transparentize(black, 0.75);
+  }
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.advance-button {
+  background-color: map.get(v.$primary, 200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  max-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  &:not(.disabled) {
+    transition: background-color 200ms ease;
+    cursor: pointer;
+    &:hover {
+      background-color: map.get(v.$primary, 100);
+    }
+  }
+}

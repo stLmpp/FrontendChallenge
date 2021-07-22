@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, pluck } from 'rxjs';
-import { isFunction } from '../../utils/utils';
+import { isFunction, resolveUpdate } from '../../utils/utils';
 import { Stores } from './stores';
 
 /**
@@ -35,7 +35,7 @@ export abstract class Store<T extends Record<any, any>> {
    */
   updateState(partial: Partial<T> | ((oldState: T) => T)): this {
     const state = { ...this._state$.value };
-    const update = isFunction(partial) ? partial : (oldState: T) => ({ ...oldState, ...partial });
+    const update = resolveUpdate(partial);
     this._state$.next(update(state));
     return this;
   }
@@ -117,5 +117,14 @@ export abstract class Store<T extends Record<any, any>> {
    */
   toJSON(): string {
     return JSON.stringify(this.getState());
+  }
+
+  /**
+   * @description Tries to convert the JSON to the state
+   * @returns {this}
+   */
+  fromJSON(json: string): this {
+    this.setState(JSON.parse(json));
+    return this;
   }
 }
