@@ -5,7 +5,6 @@ import { RouteParamEnum } from '../models/route-param.enum';
 import { filterNil } from '../utils/operators/filter-nil';
 import { TournamentService } from '../services/tournament.service';
 import { TournamentWithTeamsGames } from '../models/tournament';
-import { trackById } from '../utils/track-by';
 
 @Component({
   selector: 'app-tournament',
@@ -29,6 +28,4 @@ export class TournamentComponent {
   readonly teamsAvailable$ = this._idTournament$.pipe(
     switchMap(idTournament => this.tournamentService.selectTeamsAvailable(idTournament))
   );
-
-  readonly trackById = trackById;
 }

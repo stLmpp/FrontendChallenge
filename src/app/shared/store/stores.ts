@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isObject } from '../utils/utils';
+import { isObject } from '../../utils/utils';
 import { Store } from './store';
 
 /**

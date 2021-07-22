@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store } from '../store/store';
+import { Store } from '../shared/store/store';
 import { Team } from '../models/team';
-import { Stores } from '../store/stores';
+import { Stores } from '../shared/store/stores';
 import { map, Observable } from 'rxjs';
 
 export interface TeamState {

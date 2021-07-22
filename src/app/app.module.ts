@@ -8,10 +8,10 @@ import { HeaderModule } from './header/header.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatFormFieldDefaultOptions } from '@angular/material/form-field/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { StoresModule } from './store/stores.module';
+import { StoresModule } from './shared/store/stores.module';
 import { TeamService } from './services/team.service';
 import { TournamentService } from './services/tournament.service';
-import { DialogModule } from './dialog/dialog.module';
+import { DialogModule } from './shared/dialog/dialog.module';
 import { GameService } from './services/game.service';
 
 @NgModule({

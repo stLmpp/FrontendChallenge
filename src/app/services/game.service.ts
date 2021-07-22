@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Game, GameWithTeams } from '../models/game';
-import { Store } from '../store/store';
-import { Stores } from '../store/stores';
+import { Store } from '../shared/store/store';
+import { Stores } from '../shared/store/stores';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TeamService } from './team.service';
 import { Team } from '../models/team';

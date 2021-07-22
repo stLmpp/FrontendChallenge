@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeamListComponent } from './team-list/team-list.component';
 import { MatListModule } from '@angular/material/list';
-import { DialogModule } from '../dialog/dialog.module';
+import { DialogModule } from '../shared/dialog/dialog.module';
 
 @NgModule({
   declarations: [TeamCrudComponent, TeamAddComponent, TeamEditComponent, TeamComponent, TeamListComponent],

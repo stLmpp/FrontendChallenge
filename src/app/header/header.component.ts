@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Renderer2 } from '@angular/core';
-import { Stores } from '../store/stores';
+import { Stores } from '../shared/store/stores';
 import { DOCUMENT } from '@angular/common';
+import { DialogService } from '../shared/dialog/dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +14,16 @@ export class HeaderComponent {
     private stores: Stores,
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private document: Document,
-    private renderer2: Renderer2
+    private renderer2: Renderer2,
+    private dialogService: DialogService
   ) {
     this.stores.fromJSON(
       JSON.stringify({
         team: {
-          json: '{"teams":[{"name":"Team 1","subTitle":"Best team","description":"teamte teamtemteamt etamt aemt taemtae ","id":1},{"name":"Team 2","subTitle":"Team 2","description":"Team 2","id":1},{"name":"Team 3","subTitle":"Team 3","description":"Team 3","id":2}]}',
-          uid: 3,
+          json: '{"teams":[{"name":"Team Logi","subTitle":"Team 1","description":"Team 1","id":1},{"name":"Team 2","subTitle":"Team 2","description":"Team 2","id":2},{"name":"Team 3","subTitle":"Team 3","description":"Team 3","id":3}]}',
+          uid: 4,
         },
+        game: { json: '{"games":[]}', uid: 1 },
         tournament: { json: '{"tournaments":[]}', uid: 1 },
       })
     );
@@ -53,5 +56,15 @@ export class HeaderComponent {
     }-${date.getFullYear()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`;
     this.renderer2.setProperty(aElement, 'download', fileName);
     aElement.click();
+  }
+
+  onReset(): void {
+    this.dialogService
+      .confirm({ title: 'Reset all data?', btnYes: 'Reset', btnNo: 'Close', content: `This action can't be undone` })
+      .subscribe(result => {
+        if (result) {
+          this.stores.reset();
+        }
+      });
   }
 }

@@ -1,0 +1,29 @@
+<mat-form-field>
+  <mat-label>Teams</mat-label>
+  <mat-chip-list #teamsChipList>
+    <mat-chip
+      *ngFor="let team of tournament.teams; trackBy: trackById"
+      [removable]="team.removable"
+      (removed)="onTeamRemoved(tournament.id, $event)"
+      [value]="team.id"
+    >
+      {{ team.name }}
+      <mat-icon matChipRemove *ngIf="team.removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+  <mat-autocomplete autoActiveFirstOption #teamsAutocomplete="matAutocomplete">
+    <mat-option
+      *ngFor="let team of teamsAvailable | search: 'name':(teamTerm$ | async); trackBy: trackById"
+      [value]="team.id"
+      (onSelectionChange)="onTeamSelected(tournament.id, $event)"
+    >
+      {{ team.name }}
+    </mat-option>
+  </mat-autocomplete>
+  <input
+    matInput
+    [matChipInputFor]="teamsChipList"
+    [matAutocomplete]="teamsAutocomplete"
+    (input)="onTeamTermInput($event)"
+  />
+</mat-form-field>
