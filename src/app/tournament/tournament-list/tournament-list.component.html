@@ -1,12 +1,23 @@
-<mat-nav-list>
-  <div mat-subheader>Tournaments</div>
-  <ng-container *ngFor="let tournament of tournaments$ | async; trackBy: trackById">
-    <a mat-list-item [routerLink]="['../', tournament.id]">
-      <div mat-line>
-        {{ tournament.name }}
-      </div>
-      <mat-icon> arrow_forward_ios </mat-icon>
-    </a>
-    <mat-divider></mat-divider>
-  </ng-container>
-</mat-nav-list>
+<div class="container" *ngIf="tournaments$ | async as tournaments">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [formControl]="termControl" autocomplete="off" />
+  </mat-form-field>
+  <div>
+    <a mat-raised-button color="primary" routerLink="../new">Add new tournament</a>
+  </div>
+  <mat-nav-list>
+    <div mat-subheader>Tournaments</div>
+    <p *ngIf="!tournaments.length">No tournaments found</p>
+    <ng-container *ngFor="let tournament of tournaments; trackBy: trackById">
+      <a mat-list-item [routerLink]="['../', tournament.id]">
+        <div mat-line>
+          {{ tournament.name }}
+        </div>
+        <mat-icon> arrow_forward_ios </mat-icon>
+      </a>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-nav-list>
+</div>

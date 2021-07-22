@@ -75,8 +75,7 @@ export class TournamentService extends Store<TournamentState> {
     ]).pipe(
       map(([tournament, teams, phases]) => {
         if (!tournament) {
-          this.add({ name: 'New tournament' });
-          return undefined;
+          return;
         }
         const firstPhase = phases[0];
         const cdkDropLists = (firstPhase?.games ?? []).reduce(
@@ -138,5 +137,9 @@ export class TournamentService extends Store<TournamentState> {
       [] as Omit<Game, 'id'>[]
     );
     this.gameService.addMany(gameDtos);
+  }
+
+  getTournament(idTournament: number): Tournament | undefined {
+    return this.getState('tournaments').find(tournament => tournament.id === idTournament);
   }
 }

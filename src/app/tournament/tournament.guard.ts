@@ -16,8 +16,9 @@ export class TournamentGuard implements CanActivate {
     if (!idTournament) {
       return false;
     }
-    if (/\D+/.test(idTournament)) {
-      return this.router.createUrlTree(['/tournament', this.tournamentService.nextUid()]);
+    if (/\D+/.test(idTournament) || !this.tournamentService.getTournament(+idTournament)) {
+      const tournament = this.tournamentService.add({ name: 'New tournament' });
+      return this.router.createUrlTree(['/tournament', tournament.id]);
     }
     return true;
   }

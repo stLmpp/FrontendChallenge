@@ -41,10 +41,14 @@ export class PhaseService extends Store<PhaseState> {
     return phase;
   }
 
+  selectByIdTournament(idTournament: number): Observable<Phase[]> {
+    return this.selectState('phases').pipe(map(phases => phases.filter(phase => phase.idTournament === idTournament)));
+  }
+
   selectByIdTournamentWithGames(idTournament: number): Observable<PhaseWithGames[]> {
     return combineLatest([
       this.gameService.selectByIdTournamentWithTeams(idTournament),
-      this.selectState('phases'),
+      this.selectByIdTournament(idTournament),
     ]).pipe(
       map(([games, phases]) =>
         phases.map(phase => ({ ...phase, games: games.filter(game => game.idPhase === phase.id) }))
