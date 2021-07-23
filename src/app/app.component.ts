@@ -7,5 +7,3 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
-// TODO add back-button to the components
-// TODO add navigation in the home component
