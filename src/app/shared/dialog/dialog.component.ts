@@ -26,7 +26,7 @@ export class DialogComponent {
     private matDialogRef: MatDialogRef<DialogComponentData, boolean>
   ) {}
 
-  trackByButton: TrackByFunction<DialogComponentDataButton> = index => index;
+  readonly trackByButton: TrackByFunction<DialogComponentDataButton> = index => index;
 
   onButtonClick(button: DialogComponentDataButton): void {
     if (!button.action) {

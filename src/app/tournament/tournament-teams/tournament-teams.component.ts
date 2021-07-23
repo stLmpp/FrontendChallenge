@@ -19,7 +19,7 @@ export class TournamentTeamsComponent {
 
   private readonly _teamTerm$ = new BehaviorSubject('');
 
-  @ViewChild(MatAutocompleteTrigger) trigger!: MatAutocompleteTrigger;
+  @ViewChild(MatAutocompleteTrigger) readonly matAutocompleteTrigger!: MatAutocompleteTrigger;
 
   @Input() tournament!: TournamentWithTeamsPhases;
   @Input() teamsAvailable!: Team[];
@@ -31,7 +31,7 @@ export class TournamentTeamsComponent {
     this.tournamentService.addTeam(idTournament, $event.source.value);
     setTimeout(() => {
       // Work around to keep the autocomplete open (I know, it's ugly)
-      this.trigger.openPanel();
+      this.matAutocompleteTrigger.openPanel();
     });
   }
 

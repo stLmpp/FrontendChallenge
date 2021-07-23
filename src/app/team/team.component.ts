@@ -21,7 +21,7 @@ export class TeamComponent {
   logoError = false;
   imageError = false;
 
-  team$ = this.activatedRoute.paramMap.pipe(
+  readonly team$ = this.activatedRoute.paramMap.pipe(
     map(paramMap => paramMap.get(RouteParamEnum.idTeam)),
     filterNil(),
     switchMap(idTeam => this.teamService.selectTeam(+idTeam)),

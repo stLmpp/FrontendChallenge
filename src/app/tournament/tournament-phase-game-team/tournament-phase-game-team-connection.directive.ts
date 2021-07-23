@@ -30,7 +30,7 @@ export class TournamentPhaseGameTeamConnectionDirective implements OnChanges, Af
     private globalListenersService: GlobalListenersService
   ) {}
 
-  private _destroy$ = new Subject<void>();
+  private readonly _destroy$ = new Subject<void>();
   private _afterViewInit = false;
   private _squarePath?: SquarePath;
   private _container!: HTMLDivElement;

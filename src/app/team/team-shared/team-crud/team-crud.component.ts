@@ -20,7 +20,7 @@ export class TeamCrudComponent {
 
   private _team?: Team;
 
-  @ViewChild('firstInput') firstInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('firstInput') readonly firstInput!: ElementRef<HTMLInputElement>;
 
   @Input() mode!: TeamCrudMode;
 

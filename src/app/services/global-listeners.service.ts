@@ -6,5 +6,5 @@ import { auditTime, fromEvent, share } from 'rxjs';
 export class GlobalListenersService {
   constructor(@Inject(WINDOW) private window: Window) {}
 
-  windowResize$ = fromEvent(this.window, 'resize').pipe(auditTime(300), share());
+  readonly windowResize$ = fromEvent(this.window, 'resize').pipe(auditTime(300), share());
 }

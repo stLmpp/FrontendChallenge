@@ -30,7 +30,7 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
   @Input() disabled = false;
   @Input() tournamentFinished?: Date;
 
-  @ViewChild(TeamMiniCardComponent) teamMiniCardComponent!: TeamMiniCardComponent;
+  @ViewChild(TeamMiniCardComponent) readonly teamMiniCardComponent!: TeamMiniCardComponent;
 
   teamDrag: Team | undefined = undefined;
 

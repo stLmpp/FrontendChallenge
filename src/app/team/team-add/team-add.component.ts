@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TeamAddComponent {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
-  teamCrudMode = TeamCrudMode;
+  readonly teamCrudMode = TeamCrudMode;
 
   onSnackBarShow(team: Team): void {
     this.router.navigate(['../', team.id], { relativeTo: this.activatedRoute }).then();
