@@ -9,6 +9,6 @@ Perfil do Invocador
 
 **GULP, GRUNT? Conheço, porém nunca usei. Já usei outros bundlers como Webpack, rollup, esbuild, snowpack, vite**
 
-**Bower morreu? Sim.** 
+**Bower morreu? Sim. Hoje em dia é mais utilizado NPM e Yarn** 
 
 **Como nos conheceu: LinkedIn**   
