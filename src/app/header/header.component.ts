@@ -24,12 +24,12 @@ export class HeaderComponent {
           uid: 9,
         },
         game: {
-          json: '{"games":[{"idTournament":1,"idPhase":1,"id":1,"idTeamA":1,"idTeamB":2,"winner":1},{"idTournament":1,"idPhase":1,"id":2,"idTeamA":3,"idTeamB":4,"winner":3},{"idTournament":1,"idPhase":1,"id":3,"idTeamA":5,"idTeamB":6,"winner":6},{"idTournament":1,"idPhase":1,"id":4,"idTeamA":7,"idTeamB":8,"winner":7},{"idTournament":1,"idPhase":2,"id":5,"idTeamA":1,"idTeamB":3,"winner":3},{"idTournament":1,"idPhase":2,"id":6,"idTeamA":6,"idTeamB":7,"winner":7},{"idTournament":1,"idPhase":3,"id":7,"idTeamB":7,"idTeamA":3,"winner":3},{"idTournament":1,"idPhase":4,"id":8,"idTeamA":3},{"idTournament":2,"idPhase":5,"id":9,"idTeamA":1,"idTeamB":2},{"idTournament":2,"idPhase":5,"id":10,"idTeamA":3,"idTeamB":4},{"idTournament":2,"idPhase":6,"id":11}]}',
-          uid: 12,
+          json: '{"games":[{"idTournament":1,"idPhase":1,"id":1,"idTeamA":1,"idTeamB":2,"winner":1},{"idTournament":1,"idPhase":1,"id":2,"idTeamA":3,"idTeamB":4,"winner":3},{"idTournament":1,"idPhase":1,"id":3,"idTeamA":5,"idTeamB":6,"winner":6},{"idTournament":1,"idPhase":1,"id":4,"idTeamA":7,"idTeamB":8,"winner":7},{"idTournament":1,"idPhase":2,"id":5,"idTeamA":1,"idTeamB":3,"winner":3},{"idTournament":1,"idPhase":2,"id":6,"idTeamA":6,"idTeamB":7,"winner":7},{"idTournament":1,"idPhase":3,"id":7,"idTeamB":7,"idTeamA":3,"winner":3},{"idTournament":1,"idPhase":4,"id":8,"idTeamA":3},{"idTournament":2,"idPhase":8,"id":12},{"idTournament":2,"idPhase":8,"id":13},{"idTournament":2,"idPhase":9,"id":14},{"idTournament":2,"idPhase":10,"id":15}]}',
+          uid: 16,
         },
         phase: {
-          json: '{"phases":[{"idTournament":1,"number":1,"id":1},{"idTournament":1,"number":2,"id":2},{"idTournament":1,"number":3,"id":3},{"idTournament":1,"number":4,"id":4},{"idTournament":2,"number":1,"id":5},{"idTournament":2,"number":2,"id":6},{"idTournament":2,"number":3,"id":7}]}',
-          uid: 8,
+          json: '{"phases":[{"idTournament":1,"number":1,"id":1},{"idTournament":1,"number":2,"id":2},{"idTournament":1,"number":3,"id":3},{"idTournament":1,"number":4,"id":4},{"idTournament":2,"number":1,"id":8},{"idTournament":2,"number":2,"id":9},{"idTournament":2,"number":3,"id":10}]}',
+          uid: 11,
         },
         tournament: {
           json: '{"tournaments":[{"name":"teste","id":1,"idTeams":[1,2,5,6,4,3,7,8],"idGames":[]},{"name":"Tournament 2","id":2,"idTeams":[1,3,4,2]}]}',

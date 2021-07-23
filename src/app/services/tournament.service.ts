@@ -121,7 +121,7 @@ export class TournamentService extends Store<TournamentState> {
           createPhases: !tournamentTeamsValidation(tournament) || !!phases.length,
           cdkDropLists,
           // The last "game" needs to be set
-          canFinish: !!phases[phases.length - 1]?.games[0].idTeamA,
+          canFinish: !!phases[phases.length - 1]?.games?.[0]?.idTeamA,
         };
         if (tournamentWithTeamsPhases.idTeamWinner) {
           // Add the team winner
@@ -162,7 +162,7 @@ export class TournamentService extends Store<TournamentState> {
     const gameDtos: Omit<Game, 'id'>[] = phases.reduce(
       (acc, phase) => [
         ...acc,
-        ...Array.from({ length: tournament.idTeams.length / phase.number / 2 }, () => ({
+        ...Array.from({ length: Math.ceil(tournament.idTeams.length / phase.number / 2) }, () => ({
           idTournament,
           idPhase: phase.id,
         })),

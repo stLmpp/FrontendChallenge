@@ -32,9 +32,10 @@ export class TournamentPhaseGameTeamConnectionDirective implements OnChanges, Af
   @Input('appTournamentPhaseGameTeamConnection') game!: Game;
 
   private _render(): void {
-    if (!this._afterViewInit || !this.game) {
+    if (!this._afterViewInit || !this.game || !this.game.teamAElement || !this.game.teamBElement) {
       return;
     }
+
     const gameTeamSide = this.phaseService.getNextPhaseGame(this.game.idTournament, this.game.idPhase, this.game.id);
     if (!gameTeamSide) {
       return;
