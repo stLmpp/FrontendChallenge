@@ -9,7 +9,7 @@ export interface GameState {
   games: Game[];
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GameService extends Store<GameState> {
   constructor(stores: Stores, private teamService: TeamService) {
     super(stores, 'game', { games: [] });

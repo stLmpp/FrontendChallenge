@@ -20,7 +20,7 @@ export function tournamentTeamsValidation(tournament: Tournament): boolean {
   return tournament.idTeams.length > 1 && (tournament.idTeams.length === 2 || tournament.idTeams.length % 4 === 0);
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TournamentService extends Store<TournamentState> {
   constructor(
     stores: Stores,

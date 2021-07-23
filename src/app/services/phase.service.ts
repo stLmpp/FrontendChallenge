@@ -11,7 +11,7 @@ export interface PhaseState {
   phases: Phase[];
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PhaseService extends Store<PhaseState> {
   constructor(stores: Stores, private gameService: GameService) {
     super(stores, 'phase', { phases: [] });

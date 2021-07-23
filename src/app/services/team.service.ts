@@ -8,7 +8,7 @@ export interface TeamState {
   teams: Team[];
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TeamService extends Store<TeamState> {
   constructor(stores: Stores) {
     super(stores, 'team', { teams: [] });

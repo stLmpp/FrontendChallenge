@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { DialogComponent, DialogComponentData } from './dialog.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DialogService {
   constructor(private matDialog: MatDialog) {}
 

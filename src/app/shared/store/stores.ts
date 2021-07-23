@@ -1,13 +1,27 @@
 import { Injectable } from '@angular/core';
 import { isObject } from '../../utils/utils';
 import { Store } from './store';
+import { StoreSave } from './store-save';
 
 /**
  * @description Service to store all the Stores
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class Stores {
-  private _stores = new Map<string, Store<any>>();
+  private readonly _saves = new Map<string, StoreSave>();
+  private readonly _stores = new Map<string, Store<any>>();
+
+  private _setFromSave(store: Store<any>, save: StoreSave): void {
+    try {
+      store.fromJSON(save.json).setUid(save.uid ?? 1);
+    } catch {
+      if (typeof ngDevMode === 'undefined' || ngDevMode) {
+        // Only log if in development (ng serve)
+        // eslint-disable-next-line no-console
+        console.error(`Invalid JSON for the store ${store.name}`);
+      }
+    }
+  }
 
   /**
    * @description Get store by the name
@@ -28,6 +42,11 @@ export class Stores {
       throw new Error(`Store with name ${store.name} already exists`);
     }
     this._stores.set(store.name, store);
+    const save = this._saves.get(store.name);
+    if (save) {
+      this._setFromSave(store, save);
+      this._saves.delete(store.name);
+    }
     return this;
   }
 
@@ -36,7 +55,10 @@ export class Stores {
    * @returns {string}
    */
   toJSON(): string {
-    const object: Record<string, any> = {};
+    const object: Record<string, StoreSave> = {};
+    for (const [name, save] of this._saves) {
+      object[name] = save;
+    }
     for (const [name, store] of this._stores) {
       object[name] = { json: store.toJSON(), uid: store.currentUid() };
     }
@@ -49,7 +71,7 @@ export class Stores {
    * @returns {this}
    */
   fromJSON(json: string): this {
-    let object: Record<string, any>;
+    let object: Record<string, StoreSave>;
     try {
       object = JSON.parse(json);
     } catch {
@@ -68,21 +90,13 @@ export class Stores {
       }
       return this;
     }
-    for (const [name, state] of Object.entries(object)) {
+    for (const [name, save] of Object.entries(object)) {
       const store = this.get(name);
       if (!store) {
+        this._saves.set(name, save);
         continue;
       }
-      try {
-        store.fromJSON(state.json);
-        store.setUid(state.uid ?? 1);
-      } catch {
-        if (typeof ngDevMode === 'undefined' || ngDevMode) {
-          // Only log if in development (ng serve)
-          // eslint-disable-next-line no-console
-          console.error(`Invalid JSON for the store ${store.name}`);
-        }
-      }
+      this._setFromSave(store, save);
     }
     return this;
   }
@@ -91,6 +105,7 @@ export class Stores {
     for (const [, store] of this._stores) {
       store.resetState();
     }
+    this._saves.clear();
     return this;
   }
 }
