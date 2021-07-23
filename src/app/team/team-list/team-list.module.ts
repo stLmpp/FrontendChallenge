@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { GoBackModule } from '../../shared/go-back/go-back.module';
 
 @NgModule({
   declarations: [TeamListComponent],
@@ -21,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
     ReactiveFormsModule,
     MatButtonModule,
     MatListModule,
+    GoBackModule,
   ],
 })
 export class TeamListModule {}

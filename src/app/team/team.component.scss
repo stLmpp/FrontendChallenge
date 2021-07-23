@@ -1,9 +1,9 @@
-.card-container {
+:host {
   display: flex;
   justify-content: center;
 }
 
-.mat-card {
+.card-container {
   max-width: 400px;
   min-width: 400px;
 }

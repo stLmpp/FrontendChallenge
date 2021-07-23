@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
   <span class="brand" routerLink="/">Summoners Rift</span>
   <span class="spacer"></span>
+  <a mat-button routerLink="/team/list">Teams</a>
+  <a mat-button routerLink="/tournament/list">Tournaments</a>
   <button mat-button type="button" [disabled]="loading" (click)="onReset()">Reset</button>
   <button mat-button type="button" [disabled]="loading" (click)="onSave()">Save</button>
   <button mat-button type="button" (click)="fileInput.click()" [disabled]="loading">Load</button>

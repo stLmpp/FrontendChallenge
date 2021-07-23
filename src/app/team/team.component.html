@@ -1,10 +1,11 @@
 <ng-container *ngIf="{ team: team$ | async } as state">
-  <ng-template #teamNotFound>
-    <p>Team not found</p>
-    <a mat-raised-button color="primary" routerLink="../add">Add team</a>
-  </ng-template>
-  <div class="card-container" *ngIf="state.team as team; else teamNotFound">
-    <mat-card>
+  <div class="card-container">
+    <app-go-back path="../list">Teams</app-go-back>
+    <ng-template #teamNotFound>
+      <p>Team not found</p>
+      <a mat-raised-button color="primary" routerLink="../add">Add team</a>
+    </ng-template>
+    <mat-card *ngIf="state.team as team; else teamNotFound">
       <mat-card-header>
         <img
           *ngIf="!logoError; else logoErrorTemplate"

@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const DECLARATIONS = [TeamMiniCardComponent, TeamCrudComponent];
 const MODULES = [
@@ -20,6 +21,7 @@ const MODULES = [
   MatFormFieldModule,
   MatInputModule,
   ReactiveFormsModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

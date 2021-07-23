@@ -13,6 +13,7 @@ import { TournamentPhaseComponent } from './tournament-phase/tournament-phase.co
 import { TournamentPhaseGameTeamComponent } from './tournament-phase-game-team/tournament-phase-game-team.component';
 import { FormsModule } from '@angular/forms';
 import { TournamentPhaseGameTeamConnectionDirective } from './tournament-phase-game-team/tournament-phase-game-team-connection.directive';
+import { GoBackModule } from '../shared/go-back/go-back.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TournamentPhaseGameTeamConnectionDirective } from './tournament-phase-g
     MatAutocompleteModule,
     ArrayModule,
     FormsModule,
+    GoBackModule,
   ],
 })
 export class TournamentModule {}
