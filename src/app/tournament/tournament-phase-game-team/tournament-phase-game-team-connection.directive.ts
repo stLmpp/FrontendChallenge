@@ -13,6 +13,9 @@ import { PhaseService } from '../../services/phase.service';
 import { Game, GameTeamElementKey } from '../../models/game';
 import { SquarePath } from 'svg-dom-arrows';
 import { DOCUMENT } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
+import { TournamentPhaseGameTeamConnectionService } from './tournament-phase-game-team-connection.service';
+import { GlobalListenersService } from '../../services/global-listeners.service';
 
 @Directive({
   selector: '[appTournamentPhaseGameTeamConnection]',
@@ -22,9 +25,12 @@ export class TournamentPhaseGameTeamConnectionDirective implements OnChanges, Af
     private phaseService: PhaseService,
     private elementRef: ElementRef<HTMLElement>,
     private renderer2: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private tournamentPhaseGameTeamConnectionService: TournamentPhaseGameTeamConnectionService,
+    private globalListenersService: GlobalListenersService
   ) {}
 
+  private _destroy$ = new Subject<void>();
   private _afterViewInit = false;
   private _squarePath?: SquarePath;
   private _container!: HTMLDivElement;
@@ -74,7 +80,7 @@ export class TournamentPhaseGameTeamConnectionDirective implements OnChanges, Af
       oldGame.idPhase !== newGame.idPhase ||
       oldGame.id !== newGame.id ||
       oldGame.teamAElement !== newGame.teamAElement ||
-      oldGame.teamBElement !== oldGame.teamBElement
+      oldGame.teamBElement !== newGame.teamBElement
     ) {
       this._render();
     }
@@ -92,9 +98,17 @@ export class TournamentPhaseGameTeamConnectionDirective implements OnChanges, Af
     }
     this._afterViewInit = true;
     this._render();
+    this.tournamentPhaseGameTeamConnectionService.redrawConnections$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+      this._render();
+    });
+    this.globalListenersService.windowResize$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+      this._render();
+    });
   }
 
   ngOnDestroy(): void {
     this._squarePath?.release();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

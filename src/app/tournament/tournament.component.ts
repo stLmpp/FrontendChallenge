@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, switchMap } from 'rxjs';
 import { RouteParamEnum } from '../models/route-param.enum';
@@ -21,7 +21,8 @@ export class TournamentComponent {
     private tournamentService: TournamentService,
     private dialogService: DialogService,
     private teamService: TeamService,
-    private router: Router
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   private readonly _idTournament$ = this.activatedRoute.paramMap.pipe(
@@ -46,6 +47,10 @@ export class TournamentComponent {
 
   createPhases(tournament: TournamentWithTeamsPhases): void {
     this.tournamentService.createPhases(tournament.id);
+    setTimeout(() => {
+      // Needed to create the connections between games
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   deletePhases(tournament: TournamentWithTeamsPhases): void {

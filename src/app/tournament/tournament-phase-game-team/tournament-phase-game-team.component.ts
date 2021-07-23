@@ -5,6 +5,7 @@ import { GameService } from '../../services/game.service';
 import { Game, GameTeamSide } from '../../models/game';
 import { PhaseService } from '../../services/phase.service';
 import { TeamMiniCardComponent } from '../../team/team-shared/team-mini-card/team-mini-card.component';
+import { TournamentPhaseGameTeamConnectionService } from './tournament-phase-game-team-connection.service';
 
 @Component({
   selector: 'app-tournament-phase-game-team',
@@ -14,7 +15,11 @@ import { TeamMiniCardComponent } from '../../team/team-shared/team-mini-card/tea
   host: { class: 'tournament-phase-game-team' },
 })
 export class TournamentPhaseGameTeamComponent implements AfterViewInit {
-  constructor(private gameService: GameService, private phaseService: PhaseService) {}
+  constructor(
+    private gameService: GameService,
+    private phaseService: PhaseService,
+    private tournamentPhaseGameTeamConnectionService: TournamentPhaseGameTeamConnectionService
+  ) {}
 
   @Input() phaseNumber!: number;
   @Input() game!: Game;
@@ -31,10 +36,12 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
 
   onCdkDropListEntered($event: CdkDragEnter<Team>): void {
     this.teamDrag = $event.item.data;
+    this.tournamentPhaseGameTeamConnectionService.redrawConnections();
   }
 
   onCdkDropListExited(): void {
     this.teamDrag = undefined;
+    this.tournamentPhaseGameTeamConnectionService.redrawConnections();
   }
 
   onCdkDropListDropped($event: CdkDragDrop<Team, Team>): void {
@@ -46,6 +53,7 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
       $event.item.data.id,
       this.teamSide
     );
+    this.tournamentPhaseGameTeamConnectionService.redrawConnections();
   }
 
   onAdvanceButtonClick(): void {
