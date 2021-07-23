@@ -30,6 +30,18 @@ export class Stores {
     }
   }
 
+  private _showDialogSuccess(message: string): void {
+    this.dialogService.open({
+      title: message,
+      buttons: [
+        {
+          title: 'Close',
+          action: matDialogRef => matDialogRef.close(),
+        },
+      ],
+    });
+  }
+
   private _setFromSave(store: Store<any>, save: StoreSave): void {
     try {
       store.fromJSON(save.json).setUid(save.uid ?? 1);
@@ -105,6 +117,7 @@ export class Stores {
       }
       this._setFromSave(store, save);
     }
+    this._showDialogSuccess('Data loaded successfully');
     return this;
   }
 
