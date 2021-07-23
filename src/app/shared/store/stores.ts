@@ -2,24 +2,39 @@ import { Injectable } from '@angular/core';
 import { isObject } from '../../utils/utils';
 import { Store } from './store';
 import { StoreSave } from './store-save';
+import { DialogService } from '../dialog/dialog.service';
 
 /**
  * @description Service to store all the Stores
  */
 @Injectable({ providedIn: 'root' })
 export class Stores {
+  constructor(private dialogService: DialogService) {}
+
   private readonly _saves = new Map<string, StoreSave>();
   private readonly _stores = new Map<string, Store<any>>();
+
+  private _showDialogError(error: string): void {
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      // Only log if in development (ng serve)
+      this.dialogService.open({
+        title: '[Store] Error when trying to load the store',
+        content: error,
+        buttons: [
+          {
+            title: 'Close',
+            action: matDialogRef => matDialogRef.close(),
+          },
+        ],
+      });
+    }
+  }
 
   private _setFromSave(store: Store<any>, save: StoreSave): void {
     try {
       store.fromJSON(save.json).setUid(save.uid ?? 1);
     } catch {
-      if (typeof ngDevMode === 'undefined' || ngDevMode) {
-        // Only log if in development (ng serve)
-        // eslint-disable-next-line no-console
-        console.error(`Invalid JSON for the store ${store.name}`);
-      }
+      this._showDialogError(`Invalid JSON for the store ${store.name}`);
     }
   }
 
@@ -75,19 +90,11 @@ export class Stores {
     try {
       object = JSON.parse(json);
     } catch {
-      if (typeof ngDevMode === 'undefined' || ngDevMode) {
-        // Only log if in development (ng serve)
-        // eslint-disable-next-line no-console
-        console.error('Invalid JSON, could not load stores');
-      }
+      this._showDialogError('Invalid JSON, could not load stores');
       return this;
     }
     if (!isObject(object)) {
-      if (typeof ngDevMode === 'undefined' || ngDevMode) {
-        // Only log if in development (ng serve)
-        // eslint-disable-next-line no-console
-        console.error('Invalid JSON (not an object), could not load stores');
-      }
+      this._showDialogError('Invalid JSON (not an object), could not load stores');
       return this;
     }
     for (const [name, save] of Object.entries(object)) {

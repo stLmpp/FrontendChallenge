@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { DialogComponent, DialogComponentData } from './dialog.component';
 
@@ -24,5 +24,9 @@ export class DialogService {
       })
       .afterClosed()
       .pipe(map(result => !!result));
+  }
+
+  open<R = any>(data: DialogComponentData): MatDialogRef<DialogComponent, R> {
+    return this.matDialog.open<DialogComponent, DialogComponentData, R>(DialogComponent, { data });
   }
 }
