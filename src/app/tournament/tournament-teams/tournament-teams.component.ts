@@ -37,3 +37,5 @@ export class TournamentTeamsComponent {
     this.tournamentService.removeTeam(idTournament, $event.chip.value);
   }
 }
+
+// TODO add message to warn the quantity of teams allowed
