@@ -6,9 +6,14 @@ export interface Tournament {
   name: string;
   idTeams: number[];
   finished?: Date;
+  idTeamWinner?: number;
 }
 
-export interface TournamentWithTeamsPhases extends Tournament {
+export interface TournamentWithWinner extends Tournament {
+  teamWinner?: Team;
+}
+
+export interface TournamentWithTeamsPhases extends TournamentWithWinner {
   teams: Team[];
   phases: PhaseWithGames[];
   createPhases: boolean;

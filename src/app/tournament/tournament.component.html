@@ -43,6 +43,15 @@
     >
       Finish tournament
     </button>
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      [disabled]="!!tournament.finished"
+      (click)="deleteTournament(tournament)"
+    >
+      Delete tournament
+    </button>
   </div>
   <div class="phases">
     <app-tournament-phase

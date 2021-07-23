@@ -43,4 +43,8 @@ export class TeamService extends Store<TeamState> {
   selectTeam(idTeam: number): Observable<Team | undefined> {
     return this.selectState('teams').pipe(map(teams => teams.find(team => team.id === idTeam)));
   }
+
+  getTeam(idTeam: number): Team | undefined {
+    return this.getState('teams').find(team => team.id === idTeam);
+  }
 }

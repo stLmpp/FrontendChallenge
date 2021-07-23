@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Tournament, TournamentWithTeamsPhases } from '../models/tournament';
+import { Tournament, TournamentWithTeamsPhases, TournamentWithWinner } from '../models/tournament';
 import { Store } from '../shared/store/store';
 import { Stores } from '../shared/store/stores';
 import { TeamService } from './team.service';
@@ -67,6 +67,25 @@ export class TournamentService extends Store<TournamentState> {
     );
   }
 
+  selectTournamentsWithWinner(): Observable<TournamentWithWinner[]> {
+    return combineLatest([this.selectState('tournaments'), this.teamService.selectState('teams')]).pipe(
+      map(([tournaments, teams]) =>
+        tournaments.map(tournament => {
+          let tournamentWithWinner: TournamentWithWinner = tournament;
+          if (tournamentWithWinner.idTeamWinner) {
+            tournamentWithWinner = {
+              ...tournamentWithWinner,
+              teamWinner: teams
+                .filter(team => tournament.idTeams.includes(team.id))
+                .find(team => team.id === tournamentWithWinner.idTeamWinner),
+            };
+          }
+          return tournamentWithWinner;
+        })
+      )
+    );
+  }
+
   selectTournamentWithTeamsOrCreate(idTournament: number): Observable<TournamentWithTeamsPhases> {
     return combineLatest([
       this.selectTournament(idTournament),
@@ -77,7 +96,9 @@ export class TournamentService extends Store<TournamentState> {
         if (!tournament) {
           return;
         }
+
         const firstPhase = phases[0];
+        // Create an array with the ids of the cdk-drop-lists available to drag and drop the teams
         const cdkDropLists = (firstPhase?.games ?? []).reduce(
           (accGame, game) => [
             ...accGame,
@@ -86,19 +107,30 @@ export class TournamentService extends Store<TournamentState> {
           ],
           [] as string[]
         );
-        return {
+        // Filter the teams that are in this tournament
+        const teamsTournament = teams.filter(team => tournament.idTeams.includes(team.id));
+        let tournamentWithTeamsPhases: TournamentWithTeamsPhases = {
           ...tournament,
-          teams: teams
-            .filter(team => tournament.idTeams.includes(team.id))
-            .filter(
-              team =>
-                !phases.some(phase => phase.games.some(game => game.idTeamA === team.id || game.idTeamB === team.id))
-            ),
+          // Filter out the teams that are already in games
+          teams: teamsTournament.filter(
+            team =>
+              !phases.some(phase => phase.games.some(game => game.idTeamA === team.id || game.idTeamB === team.id))
+          ),
           phases,
+          // Validation to create the phases
           createPhases: !tournamentTeamsValidation(tournament) || !!phases.length,
           cdkDropLists,
-          canFinish: !!phases[phases.length - 1].games[0].idTeamA,
+          // The last "game" needs to be set
+          canFinish: !!phases[phases.length - 1]?.games[0].idTeamA,
         };
+        if (tournamentWithTeamsPhases.idTeamWinner) {
+          // Add the team winner
+          tournamentWithTeamsPhases = {
+            ...tournamentWithTeamsPhases,
+            teamWinner: teamsTournament.find(team => team.id === tournamentWithTeamsPhases.idTeamWinner),
+          };
+        }
+        return tournamentWithTeamsPhases;
       }),
       filterNil()
     );
@@ -146,5 +178,21 @@ export class TournamentService extends Store<TournamentState> {
 
   getTournament(idTournament: number): Tournament | undefined {
     return this.getState('tournaments').find(tournament => tournament.id === idTournament);
+  }
+
+  finishTournament(tournament: TournamentWithTeamsPhases): void {
+    const lastPhase = tournament.phases[tournament.phases.length - 1];
+    const idTeamWinner = lastPhase.games[0].idTeamA;
+    if (!idTeamWinner) {
+      return;
+    }
+    this.update(tournament.id, { finished: new Date(), idTeamWinner });
+  }
+
+  delete(idTournament: number): void {
+    this.updateState(state => ({
+      ...state,
+      tournaments: state.tournaments.filter(tournament => tournament.id !== idTournament),
+    }));
   }
 }
