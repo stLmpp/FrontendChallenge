@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label>Teams</mat-label>
+  <mat-label>{{ tournament.phases.length && !tournament.teams.length ? 'All teams selected' : 'Teams' }}</mat-label>
   <mat-chip-list
     [disabled]="!!tournament.finished"
     #teamsChipList
@@ -36,5 +36,8 @@
     (input)="onTeamTermInput($event)"
     [disabled]="!!tournament.phases.length || tournament.teams.length === 32"
   />
-  <mat-hint>The number of teams needs to be 2, 4, 8, 16 or 32</mat-hint>
+  <mat-hint *ngIf="tournament.phases.length">Drag the teams to the brackets</mat-hint>
+  <mat-hint [align]="tournament.phases.length ? 'end' : 'start'">
+    The number of teams needs to be 2, 4, 8, 16 or 32
+  </mat-hint>
 </mat-form-field>
