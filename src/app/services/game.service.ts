@@ -55,7 +55,13 @@ export class GameService extends Store<GameState> {
     );
   }
 
-  setTeam(idTournament: number, idPhase: number, idGame: number, idTeam: number, teamSide: GameTeamSide): void {
+  setTeam(
+    idTournament: number,
+    idPhase: number,
+    idGame: number,
+    idTeam: number | undefined,
+    teamSide: GameTeamSide
+  ): void {
     const key = `idTeam${teamSide.toUpperCase()}` as GameTeamSideKey;
     this.update(idTournament, idPhase, idGame, { [key]: idTeam });
   }

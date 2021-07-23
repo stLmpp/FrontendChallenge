@@ -21,7 +21,7 @@
     color="warn"
     type="button"
     (click)="deleteClick.emit($event)"
-    matTooltip="Unset winner"
+    [matTooltip]="deleteTooltip"
     matTooltipPosition="above"
   >
     <mat-icon>clear</mat-icon>

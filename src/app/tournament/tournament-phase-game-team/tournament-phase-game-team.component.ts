@@ -72,13 +72,17 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
     if (!this.team) {
       return;
     }
-    this.phaseService.unsetTeamWinner(
-      this.game.idTournament,
-      this.game.idPhase,
-      this.game.id,
-      this.team.id,
-      this.teamSide
-    );
+    if (this.phaseNumber === 1) {
+      this.gameService.setTeam(this.game.idTournament, this.game.idPhase, this.game.id, undefined, this.teamSide);
+    } else {
+      this.phaseService.unsetTeamWinner(
+        this.game.idTournament,
+        this.game.idPhase,
+        this.game.id,
+        this.team.id,
+        this.teamSide
+      );
+    }
   }
 
   ngAfterViewInit(): void {
