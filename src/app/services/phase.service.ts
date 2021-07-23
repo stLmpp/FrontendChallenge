@@ -97,6 +97,29 @@ export class PhaseService extends Store<PhaseState> {
     this.gameService.update(idTournament, nextGame.idPhase, nextGame.id, { [key]: idTeam });
   }
 
+  unsetTeamWinner(idTournament: number, idPhase: number, idGame: number, idTeam: number, teamSide: GameTeamSide): void {
+    const phases = this.getState('phases').filter(_phase => _phase.idTournament === idTournament);
+    if (!phases.length) {
+      return;
+    }
+    const phase = phases.find(_phase => _phase.id === idPhase);
+    if (!phase) {
+      return;
+    }
+    const previousPhase = phases.find(_phase => _phase.id !== idPhase && _phase.number === phase.number - 1);
+    if (!previousPhase) {
+      return;
+    }
+    const previousGames = this.gameService.getGamesByIdPhase(idTournament, previousPhase.id);
+    const previousGame = previousGames.find(game => game.winner === idTeam);
+    if (!previousGame) {
+      return;
+    }
+    this.gameService.update(idTournament, previousPhase.id, previousGame.id, { winner: undefined });
+    const key = `idTeam${teamSide.toUpperCase()}` as GameTeamSideKey;
+    this.gameService.update(idTournament, idPhase, idGame, { [key]: undefined });
+  }
+
   deleteByIdTournament(idTournament: number): void {
     this.updateState(state => ({
       ...state,

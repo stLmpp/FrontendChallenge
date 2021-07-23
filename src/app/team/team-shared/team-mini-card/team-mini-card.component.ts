@@ -24,8 +24,10 @@ export class TeamMiniCardComponent implements OnChanges {
   @Input() disabled = false;
   @Input() winner = false;
   @Input() tournamentWinner = false;
+  @Input() deleteAllowed = false;
 
   @Output() readonly buttonClick = new EventEmitter<MouseEvent>();
+  @Output() readonly deleteClick = new EventEmitter<MouseEvent>();
 
   logoError = false;
 

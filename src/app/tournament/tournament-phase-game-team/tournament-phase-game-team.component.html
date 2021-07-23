@@ -4,7 +4,9 @@
   [tournamentWinner]="tournamentWinner"
   [disabled]="disabled"
   [winner]="!!team && !!idTeamWinner && team.id === idTeamWinner"
+  [deleteAllowed]="!idTeamWinner && !!team && phaseNumber > 1"
   (buttonClick)="onAdvanceButtonClick()"
+  (deleteClick)="onDeleteButtonClick()"
   cdkDropList
   [cdkDropListDisabled]="!!team"
   (cdkDropListEntered)="onCdkDropListEntered($event)"

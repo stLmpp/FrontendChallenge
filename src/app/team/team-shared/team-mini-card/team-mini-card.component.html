@@ -14,6 +14,18 @@
   <div class="name" [matTooltip]="team?.name ?? ''" matTooltipPosition="above" [matTooltipDisabled]="!team">
     {{ team?.name }}
   </div>
+  <button
+    *ngIf="deleteAllowed"
+    class="delete-button"
+    mat-icon-button
+    color="warn"
+    type="button"
+    (click)="deleteClick.emit($event)"
+    matTooltip="Unset winner"
+    matTooltipPosition="above"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
 </div>
 <div class="advance-button" [class.disabled]="!team || disabled">
   <button
@@ -21,6 +33,8 @@
     [disabled]="!team || disabled"
     *ngIf="!tournamentWinner && !winner"
     (click)="buttonClick.emit($event)"
+    matTooltip="Set winner"
+    matTooltipPosition="right"
   >
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>

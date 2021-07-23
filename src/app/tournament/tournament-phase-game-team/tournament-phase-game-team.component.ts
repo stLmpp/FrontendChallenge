@@ -16,6 +16,7 @@ import { TeamMiniCardComponent } from '../../team/team-shared/team-mini-card/tea
 export class TournamentPhaseGameTeamComponent implements AfterViewInit {
   constructor(private gameService: GameService, private phaseService: PhaseService) {}
 
+  @Input() phaseNumber!: number;
   @Input() game!: Game;
   @Input() idTeamWinner?: number;
   @Input() team?: Team;
@@ -55,6 +56,19 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
       this.game.idPhase,
       this.game.id,
       this.team.id
+    );
+  }
+
+  onDeleteButtonClick(): void {
+    if (!this.team) {
+      return;
+    }
+    this.phaseService.unsetTeamWinner(
+      this.game.idTournament,
+      this.game.idPhase,
+      this.game.id,
+      this.team.id,
+      this.teamSide
     );
   }
 
