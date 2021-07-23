@@ -1,3 +1,9 @@
 .cdk-drag-placeholder {
   display: none;
 }
+
+.cdk-drop-list:not(.cdk-drop-list-disabled) {
+  .cdk-drag {
+    cursor: move;
+  }
+}

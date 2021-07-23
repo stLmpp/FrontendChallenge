@@ -5,6 +5,7 @@
     #teamsChipList
     cdkDropList
     [cdkDropListConnectedTo]="tournament.cdkDropLists"
+    [cdkDropListDisabled]="!tournament.phases.length"
     id="tournament-teams"
   >
     <mat-chip

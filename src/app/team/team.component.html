@@ -15,8 +15,8 @@
           (error)="logoError = true"
         />
         <ng-template #logoErrorTemplate>
-          <div class="no-logo" mat-card-avatar matTooltip="Broken logo" matTooltipPosition="left">
-            <mat-icon>broken_image</mat-icon>
+          <div class="no-logo" mat-card-avatar>
+            {{ team.name | teamInitials }}
           </div>
         </ng-template>
         <mat-card-title>{{ team.name }}</mat-card-title>

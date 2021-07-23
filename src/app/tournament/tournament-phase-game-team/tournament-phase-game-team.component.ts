@@ -45,6 +45,9 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
   }
 
   onCdkDropListDropped($event: CdkDragDrop<Team, Team>): void {
+    if (this.team) {
+      return;
+    }
     this.teamDrag = undefined;
     this.gameService.setTeam(
       this.game.idTournament,

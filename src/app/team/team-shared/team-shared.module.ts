@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TeamInitialsPipe } from './team-initials.pipe';
 
 const DECLARATIONS = [TeamMiniCardComponent, TeamCrudComponent];
 const MODULES = [
@@ -26,7 +27,7 @@ const MODULES = [
 
 @NgModule({
   imports: [...MODULES],
-  declarations: [...DECLARATIONS],
-  exports: [...MODULES, ...DECLARATIONS],
+  declarations: [...DECLARATIONS, TeamInitialsPipe],
+  exports: [...MODULES, ...DECLARATIONS, TeamInitialsPipe],
 })
 export class TeamSharedModule {}

@@ -8,7 +8,9 @@
   />
   <ng-template #logoErrorTemplate>
     <div class="logo no-logo">
-      <mat-icon *ngIf="team">broken_image</mat-icon>
+      <ng-container *ngIf="team">
+        {{ team.name | teamInitials }}
+      </ng-container>
     </div>
   </ng-template>
   <div class="name" [matTooltip]="team?.name ?? ''" matTooltipPosition="above" [matTooltipDisabled]="!team">
