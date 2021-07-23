@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { TournamentWithTeamsPhases } from '../../models/tournament';
 import { trackById } from '../../utils/track-by';
 import { Team } from '../../models/team';
@@ -6,6 +6,7 @@ import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatChipEvent } from '@angular/material/chips';
 import { TournamentService } from '../../services/tournament.service';
 import { BehaviorSubject, debounceTime } from 'rxjs';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-tournament-teams',
@@ -18,6 +19,8 @@ export class TournamentTeamsComponent {
 
   private readonly _teamTerm$ = new BehaviorSubject('');
 
+  @ViewChild(MatAutocompleteTrigger) trigger!: MatAutocompleteTrigger;
+
   @Input() tournament!: TournamentWithTeamsPhases;
   @Input() teamsAvailable!: Team[];
 
@@ -26,6 +29,10 @@ export class TournamentTeamsComponent {
 
   onTeamSelected(idTournament: number, $event: MatOptionSelectionChange): void {
     this.tournamentService.addTeam(idTournament, $event.source.value);
+    setTimeout(() => {
+      // Work around to keep the autocomplete open (I know, it's ugly)
+      this.trigger.openPanel();
+    });
   }
 
   onTeamTermInput($event: Event): void {
