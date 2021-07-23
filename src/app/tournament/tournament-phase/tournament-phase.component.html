@@ -3,9 +3,7 @@
     <app-tournament-phase-game-team
       [tournamentWinner]="last"
       [team]="game.teamA"
-      [idGame]="game.id"
-      [idPhase]="phase.id"
-      [idTournament]="phase.idTournament"
+      [game]="game"
       [disabled]="!game.teamA || !game.teamB || !!game.winner"
       [idTeamWinner]="game.winner"
       teamSide="a"
@@ -13,9 +11,7 @@
     <app-tournament-phase-game-team
       *ngIf="!last"
       [team]="game.teamB"
-      [idGame]="game.id"
-      [idPhase]="phase.id"
-      [idTournament]="phase.idTournament"
+      [game]="game"
       [disabled]="!game.teamA || !game.teamB || !!game.winner"
       [idTeamWinner]="game.winner"
       teamSide="b"

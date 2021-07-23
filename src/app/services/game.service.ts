@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Game, GameTeamSide, GameTeamSideKey, GameWithTeams } from '../models/game';
+import { Game, GameTeamElementKey, GameTeamSide, GameTeamSideKey, GameWithTeams } from '../models/game';
 import { Store } from '../shared/store/store';
 import { Stores } from '../shared/store/stores';
 import { combineLatest, map, Observable } from 'rxjs';
@@ -56,19 +56,31 @@ export class GameService extends Store<GameState> {
   }
 
   setTeam(idTournament: number, idPhase: number, idGame: number, idTeam: number, teamSide: GameTeamSide): void {
-    const key = ('idTeam' + teamSide.toUpperCase()) as GameTeamSideKey;
-    this.updateState(state => ({
-      ...state,
-      games: state.games.map(game => {
-        if (game.idTournament === idTournament && game.idPhase === idPhase && game.id === idGame) {
-          game = { ...game, [key]: idTeam };
-        }
-        return game;
-      }),
-    }));
+    const key = `idTeam${teamSide.toUpperCase()}` as GameTeamSideKey;
+    this.update(idTournament, idPhase, idGame, { [key]: idTeam });
+  }
+
+  setTeamElement(
+    idTournament: number,
+    idPhase: number,
+    idGame: number,
+    teamSide: GameTeamSide,
+    element: HTMLElement
+  ): void {
+    const key = `team${teamSide.toUpperCase()}Element` as GameTeamElementKey;
+    this.update(idTournament, idPhase, idGame, { [key]: element });
   }
 
   getGamesByIdPhase(idTournament: number, idPhase: number): Game[] {
     return this.getState('games').filter(game => game.idTournament === idTournament && game.idPhase === idPhase);
+  }
+
+  override toJSON(): string {
+    const state = this.getState();
+    const stateSave: GameState = {
+      ...state,
+      games: state.games.map(({ teamAElement, teamBElement, ...game }) => game),
+    };
+    return JSON.stringify(stateSave);
   }
 }

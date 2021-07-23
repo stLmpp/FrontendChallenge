@@ -7,6 +7,8 @@ export interface Game {
   idTeamA?: number;
   idTeamB?: number;
   winner?: number;
+  teamAElement?: HTMLElement;
+  teamBElement?: HTMLElement;
 }
 
 export interface GameWithTeams extends Game {
@@ -16,3 +18,4 @@ export interface GameWithTeams extends Game {
 
 export type GameTeamSide = 'a' | 'b';
 export type GameTeamSideKey = `idTeam${Uppercase<GameTeamSide>}`;
+export type GameTeamElementKey = `team${Uppercase<GameTeamSide>}Element`;

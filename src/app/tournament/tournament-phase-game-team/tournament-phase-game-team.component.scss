@@ -1,3 +1,11 @@
 :host {
   display: block;
 }
+
+::ng-deep {
+  #tournament-phase-game-team-connection-container {
+    > div {
+      z-index: -1;
+    }
+  }
+}

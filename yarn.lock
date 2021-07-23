@@ -7727,6 +7727,11 @@ supports-color@^8.0.0:
   dependencies:
     has-flag "^4.0.0"
 
+svg-dom-arrows@~2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/svg-dom-arrows/-/svg-dom-arrows-2.0.2.tgz#52b0ad5c95a06847d1156ca195ecbd096983ae0b"
+  integrity sha512-Xj/d1n0J0Pf095Jhyyfu6Ww9LXYHEweCGXmXoLquxcb1GzUR6GUBpauZoZ3CyBp41fi6xKhPUdzJW7UzZWszaA==
+
 svgo@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-2.3.1.tgz#603a69ce50311c0e36791528f549644ec1b3f4bc"

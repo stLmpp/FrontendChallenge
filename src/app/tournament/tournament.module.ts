@@ -12,6 +12,7 @@ import { TeamSharedModule } from '../team/team-shared/team-shared.module';
 import { TournamentPhaseComponent } from './tournament-phase/tournament-phase.component';
 import { TournamentPhaseGameTeamComponent } from './tournament-phase-game-team/tournament-phase-game-team.component';
 import { FormsModule } from '@angular/forms';
+import { TournamentPhaseGameTeamConnectionDirective } from './tournament-phase-game-team/tournament-phase-game-team-connection.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     TournamentTeamsComponent,
     TournamentPhaseComponent,
     TournamentPhaseGameTeamComponent,
+    TournamentPhaseGameTeamConnectionDirective,
   ],
   imports: [
     CommonModule,

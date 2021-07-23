@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -17,6 +18,8 @@ import { Team } from '../../../models/team';
   host: { class: 'team-mini-card' },
 })
 export class TeamMiniCardComponent implements OnChanges {
+  constructor(public elementRef: ElementRef<HTMLElement>) {}
+
   @Input() team?: Team;
   @Input() disabled = false;
   @Input() winner = false;

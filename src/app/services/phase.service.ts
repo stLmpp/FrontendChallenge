@@ -5,7 +5,7 @@ import { Stores } from '../shared/store/stores';
 import { combineLatest, map, Observable } from 'rxjs';
 import { GameService } from './game.service';
 import { resolveUpdate } from '../utils/utils';
-import { GameTeamSideKey } from '../models/game';
+import { Game, GameTeamSide, GameTeamSideKey } from '../models/game';
 
 export interface PhaseState {
   phases: Phase[];
@@ -61,7 +61,7 @@ export class PhaseService extends Store<PhaseState> {
     );
   }
 
-  setTeamWinnerAndAdvanceToNextPhase(idTournament: number, idPhase: number, idGame: number, idTeam: number): void {
+  getNextPhaseGame(idTournament: number, idPhase: number, idGame: number): [Game, GameTeamSide] | undefined {
     const phases = this.getState('phases').filter(_phase => _phase.idTournament === idTournament);
     if (!phases.length) {
       return;
@@ -70,23 +70,30 @@ export class PhaseService extends Store<PhaseState> {
     if (!phase) {
       return;
     }
-    this.gameService.update(idTournament, idPhase, idGame, { winner: idTeam });
     const games = this.gameService.getGamesByIdPhase(idTournament, idPhase);
     const gameIndex = games.findIndex(game => game.id === idGame);
     if (gameIndex === -1) {
       return;
     }
-    const nextIndex = Math.floor(gameIndex / 2);
+    const nextIndexDivision = gameIndex / 2;
+    const nextIndex = Math.floor(nextIndexDivision);
     const nextPhase = phases.find(_phase => _phase.id !== idPhase && _phase.number === phase.number + 1);
     if (!nextPhase) {
       return;
     }
     const nextGames = this.gameService.getGamesByIdPhase(idTournament, nextPhase.id);
-    const nextGame = nextGames[nextIndex];
-    if (!nextGame) {
+    const teamSide: GameTeamSide = nextIndexDivision % 1 ? 'b' : 'a';
+    return [nextGames[nextIndex], teamSide];
+  }
+
+  setTeamWinnerAndAdvanceToNextPhase(idTournament: number, idPhase: number, idGame: number, idTeam: number): void {
+    const gameTeamSide = this.getNextPhaseGame(idTournament, idPhase, idGame);
+    if (!gameTeamSide) {
       return;
     }
-    const key: GameTeamSideKey = !nextGame.idTeamA ? 'idTeamA' : 'idTeamB';
-    this.gameService.update(idTournament, nextPhase.id, nextGame.id, { [key]: idTeam });
+    const [nextGame, teamSide] = gameTeamSide;
+    this.gameService.update(idTournament, idPhase, idGame, { winner: idTeam });
+    const key: GameTeamSideKey = `idTeam${teamSide.toUpperCase()}` as GameTeamSideKey;
+    this.gameService.update(idTournament, nextGame.idPhase, nextGame.id, { [key]: idTeam });
   }
 }

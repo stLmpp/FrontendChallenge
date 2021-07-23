@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { Team } from '../../models/team';
 import { CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { GameService } from '../../services/game.service';
-import { GameTeamSide } from '../../models/game';
+import { Game, GameTeamSide } from '../../models/game';
 import { PhaseService } from '../../services/phase.service';
+import { TeamMiniCardComponent } from '../../team/team-shared/team-mini-card/team-mini-card.component';
 
 @Component({
   selector: 'app-tournament-phase-game-team',
@@ -12,17 +13,17 @@ import { PhaseService } from '../../services/phase.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'tournament-phase-game-team' },
 })
-export class TournamentPhaseGameTeamComponent {
+export class TournamentPhaseGameTeamComponent implements AfterViewInit {
   constructor(private gameService: GameService, private phaseService: PhaseService) {}
 
-  @Input() idTournament!: number;
-  @Input() idPhase!: number;
-  @Input() idGame!: number;
+  @Input() game!: Game;
   @Input() idTeamWinner?: number;
   @Input() team?: Team;
   @Input() tournamentWinner = false;
   @Input() teamSide!: GameTeamSide;
   @Input() disabled = false;
+
+  @ViewChild(TeamMiniCardComponent) teamMiniCardComponent!: TeamMiniCardComponent;
 
   teamDrag: Team | undefined = undefined;
 
@@ -36,13 +37,34 @@ export class TournamentPhaseGameTeamComponent {
 
   onCdkDropListDropped($event: CdkDragDrop<Team, Team>): void {
     this.teamDrag = undefined;
-    this.gameService.setTeam(this.idTournament, this.idPhase, this.idGame, $event.item.data.id, this.teamSide);
+    this.gameService.setTeam(
+      this.game.idTournament,
+      this.game.idPhase,
+      this.game.id,
+      $event.item.data.id,
+      this.teamSide
+    );
   }
 
   onAdvanceButtonClick(): void {
     if (!this.team) {
       return;
     }
-    this.phaseService.setTeamWinnerAndAdvanceToNextPhase(this.idTournament, this.idPhase, this.idGame, this.team.id);
+    this.phaseService.setTeamWinnerAndAdvanceToNextPhase(
+      this.game.idTournament,
+      this.game.idPhase,
+      this.game.id,
+      this.team.id
+    );
+  }
+
+  ngAfterViewInit(): void {
+    this.gameService.setTeamElement(
+      this.game.idTournament,
+      this.game.idPhase,
+      this.game.id,
+      this.teamSide,
+      this.teamMiniCardComponent.elementRef.nativeElement
+    );
   }
 }

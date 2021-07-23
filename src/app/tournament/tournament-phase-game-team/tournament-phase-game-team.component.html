@@ -1,5 +1,5 @@
 <app-team-mini-card
-  id="tournament-phase-{{ idPhase }}-game-{{ idGame }}-team-{{ teamSide }}"
+  id="tournament-phase-{{ game.idPhase }}-game-{{ game.id }}-team-{{ teamSide }}"
   [team]="team ?? teamDrag"
   [tournamentWinner]="tournamentWinner"
   [disabled]="disabled"
@@ -10,4 +10,5 @@
   (cdkDropListEntered)="onCdkDropListEntered($event)"
   (cdkDropListExited)="onCdkDropListExited()"
   (cdkDropListDropped)="onCdkDropListDropped($event)"
+  [appTournamentPhaseGameTeamConnection]="game"
 ></app-team-mini-card>
