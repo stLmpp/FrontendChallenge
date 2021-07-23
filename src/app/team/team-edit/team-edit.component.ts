@@ -4,7 +4,7 @@ import { TeamService } from '../../services/team.service';
 import { map, switchMap } from 'rxjs';
 import { RouteParamEnum } from '../../models/route-param.enum';
 import { filterNil } from '../../utils/operators/filter-nil';
-import { TeamCrudMode } from '../team-crud/team-crud.component';
+import { TeamCrudMode } from '../team-shared/team-crud/team-crud.component';
 
 @Component({
   selector: 'app-team-edit',

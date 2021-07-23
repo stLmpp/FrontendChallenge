@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TeamCrudMode } from '../team-crud/team-crud.component';
+import { TeamCrudMode } from '../team-shared/team-crud/team-crud.component';
 import { Team } from '../../models/team';
 import { ActivatedRoute, Router } from '@angular/router';
 

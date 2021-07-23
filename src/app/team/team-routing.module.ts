@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouteParamEnum } from '../models/route-param.enum';
-import { TeamAddComponent } from './team-add/team-add.component';
-import { TeamEditComponent } from './team-edit/team-edit.component';
 import { TeamComponent } from './team.component';
-import { TeamListComponent } from './team-list/team-list.component';
 
 const routes: Routes = [
   {
     path: 'add',
-    component: TeamAddComponent,
+    loadChildren: () => import('./team-add/team-add.module').then(m => m.TeamAddModule),
   },
   {
     path: 'list',
-    component: TeamListComponent,
+    loadChildren: () => import('./team-list/team-list.module').then(m => m.TeamListModule),
   },
   {
     path: `:${RouteParamEnum.idTeam}`,
@@ -24,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'edit',
-        component: TeamEditComponent,
+        loadChildren: () => import('./team-edit/team-edit.module').then(m => m.TeamEditModule),
       },
     ],
   },

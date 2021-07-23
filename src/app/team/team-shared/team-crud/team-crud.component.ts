@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Team } from '../../models/team';
-import { TeamService } from '../../services/team.service';
+import { Team } from '../../../models/team';
+import { TeamService } from '../../../services/team.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export enum TeamCrudMode {
