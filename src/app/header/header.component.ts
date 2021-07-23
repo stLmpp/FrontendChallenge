@@ -31,6 +31,7 @@ export class HeaderComponent {
     const json = await file.text();
     this.stores.fromJSON(json);
     this.loading = false;
+    input.value = '';
     this.changeDetectorRef.markForCheck();
   }
 

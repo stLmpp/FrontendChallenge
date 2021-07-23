@@ -15,7 +15,13 @@
           (error)="logoError = true"
         />
         <ng-template #logoErrorTemplate>
-          <div class="no-logo" mat-card-avatar>
+          <div
+            class="no-logo"
+            mat-card-avatar
+            matTooltip="To show an image here, just add a logo.png in the '/assets/{{ team.name }}/' folder"
+            [matTooltipShowDelay]="200"
+            matTooltipPosition="left"
+          >
             {{ team.name | teamInitials }}
           </div>
         </ng-template>
