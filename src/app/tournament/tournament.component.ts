@@ -54,4 +54,8 @@ export class TournamentComponent {
         }
       });
   }
+
+  finishTournament(tournament: TournamentWithTeamsPhases): void {
+    this.tournamentService.update(tournament.id, { finished: new Date() });
+  }
 }

@@ -15,6 +15,9 @@
         <div mat-line>
           {{ tournament.name }}
         </div>
+        <div mat-line class="sub-line" *ngIf="!!tournament.finished">
+          Finished: {{ tournament.finished | date: 'dd/MM/yyyy' }}
+        </div>
         <mat-icon> arrow_forward_ios </mat-icon>
       </a>
       <mat-divider></mat-divider>

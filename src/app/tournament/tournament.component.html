@@ -6,6 +6,7 @@
       [ngModel]="tournament.name"
       (ngModelChange)="onNameChange(tournament.id, $event)"
       [ngModelOptions]="{ updateOn: 'blur' }"
+      [disabled]="!!tournament.finished"
     />
   </mat-form-field>
   <app-tournament-teams
@@ -27,10 +28,19 @@
       mat-raised-button
       type="button"
       color="warn"
-      [disabled]="!tournament.phases.length"
+      [disabled]="!tournament.phases.length || !!tournament.finished"
       (click)="deletePhases(tournament)"
     >
       Delete phases
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="!tournament.canFinish || !!tournament.finished"
+      (click)="finishTournament(tournament)"
+    >
+      Finish tournament
     </button>
   </div>
   <div class="phases">
@@ -38,6 +48,7 @@
       *ngFor="let phase of tournament.phases; trackBy: trackById; let $last = last"
       [phase]="phase"
       [last]="$last"
+      [tournamentFinished]="tournament.finished"
     ></app-tournament-phase>
   </div>
 </ng-container>

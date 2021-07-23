@@ -5,6 +5,7 @@ export interface Tournament {
   id: number;
   name: string;
   idTeams: number[];
+  finished?: Date;
 }
 
 export interface TournamentWithTeamsPhases extends Tournament {
@@ -12,4 +13,5 @@ export interface TournamentWithTeamsPhases extends Tournament {
   phases: PhaseWithGames[];
   createPhases: boolean;
   cdkDropLists: string[];
+  canFinish: boolean;
 }

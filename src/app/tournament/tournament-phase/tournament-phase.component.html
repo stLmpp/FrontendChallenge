@@ -5,7 +5,8 @@
       [team]="game.teamA"
       [game]="game"
       [phaseNumber]="phase.number"
-      [disabled]="!game.teamA || !game.teamB || !!game.winner"
+      [disabled]="!game.teamA || !game.teamB || !!game.winner || !!tournamentFinished"
+      [tournamentFinished]="tournamentFinished"
       [idTeamWinner]="game.winner"
       teamSide="a"
     ></app-tournament-phase-game-team>
@@ -14,7 +15,8 @@
       [team]="game.teamB"
       [game]="game"
       [phaseNumber]="phase.number"
-      [disabled]="!game.teamA || !game.teamB || !!game.winner"
+      [disabled]="!game.teamA || !game.teamB || !!game.winner || !!tournamentFinished"
+      [tournamentFinished]="tournamentFinished"
       [idTeamWinner]="game.winner"
       teamSide="b"
     ></app-tournament-phase-game-team>

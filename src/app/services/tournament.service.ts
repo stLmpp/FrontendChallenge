@@ -97,6 +97,7 @@ export class TournamentService extends Store<TournamentState> {
           phases,
           createPhases: !tournamentTeamsValidation(tournament) || !!phases.length,
           cdkDropLists,
+          canFinish: !!phases[phases.length - 1].games[0].idTeamA,
         };
       }),
       filterNil()

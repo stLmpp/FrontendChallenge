@@ -23,6 +23,7 @@ export class TournamentPhaseGameTeamComponent implements AfterViewInit {
   @Input() tournamentWinner = false;
   @Input() teamSide!: GameTeamSide;
   @Input() disabled = false;
+  @Input() tournamentFinished?: Date;
 
   @ViewChild(TeamMiniCardComponent) teamMiniCardComponent!: TeamMiniCardComponent;
 

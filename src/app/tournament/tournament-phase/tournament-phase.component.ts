@@ -11,6 +11,7 @@ import { trackById } from '../../utils/track-by';
 export class TournamentPhaseComponent {
   @Input() phase!: PhaseWithGames;
   @Input() last = false;
+  @Input() tournamentFinished?: Date;
 
   readonly trackById = trackById;
 }
