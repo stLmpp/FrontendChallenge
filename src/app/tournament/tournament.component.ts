@@ -6,6 +6,7 @@ import { filterNil } from '../utils/operators/filter-nil';
 import { TournamentService } from '../services/tournament.service';
 import { TournamentWithTeamsPhases } from '../models/tournament';
 import { trackById } from '../utils/track-by';
+import { DialogService } from '../shared/dialog/dialog.service';
 
 @Component({
   selector: 'app-tournament',
@@ -14,7 +15,11 @@ import { trackById } from '../utils/track-by';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TournamentComponent {
-  constructor(private activatedRoute: ActivatedRoute, private tournamentService: TournamentService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private tournamentService: TournamentService,
+    private dialogService: DialogService
+  ) {}
 
   private readonly _idTournament$ = this.activatedRoute.paramMap.pipe(
     map(paramMap => paramMap.get(RouteParamEnum.idTournament)),
@@ -38,5 +43,15 @@ export class TournamentComponent {
 
   createPhases(tournament: TournamentWithTeamsPhases): void {
     this.tournamentService.createPhases(tournament.id);
+  }
+
+  deletePhases(tournament: TournamentWithTeamsPhases): void {
+    this.dialogService
+      .confirm({ title: 'Delete phases?', content: `This action can't be undone`, btnNo: 'Cancel', btnYes: 'Delete' })
+      .subscribe(result => {
+        if (result) {
+          this.tournamentService.deletePhases(tournament.id);
+        }
+      });
   }
 }

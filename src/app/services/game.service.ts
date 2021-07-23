@@ -75,6 +75,10 @@ export class GameService extends Store<GameState> {
     return this.getState('games').filter(game => game.idTournament === idTournament && game.idPhase === idPhase);
   }
 
+  deleteByIdTourmanent(idTournament: number): void {
+    this.updateState(state => ({ ...state, games: state.games.filter(game => game.idTournament !== idTournament) }));
+  }
+
   override toJSON(): string {
     const state = this.getState();
     const stateSave: GameState = {

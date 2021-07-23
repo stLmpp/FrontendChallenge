@@ -96,4 +96,12 @@ export class PhaseService extends Store<PhaseState> {
     const key: GameTeamSideKey = `idTeam${teamSide.toUpperCase()}` as GameTeamSideKey;
     this.gameService.update(idTournament, nextGame.idPhase, nextGame.id, { [key]: idTeam });
   }
+
+  deleteByIdTournament(idTournament: number): void {
+    this.updateState(state => ({
+      ...state,
+      phases: state.phases.filter(phase => phase.idTournament !== idTournament),
+    }));
+    this.gameService.deleteByIdTourmanent(idTournament);
+  }
 }

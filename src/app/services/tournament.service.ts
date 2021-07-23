@@ -139,6 +139,10 @@ export class TournamentService extends Store<TournamentState> {
     this.gameService.addMany(gameDtos);
   }
 
+  deletePhases(idTournament: number): void {
+    this.phaseService.deleteByIdTournament(idTournament);
+  }
+
   getTournament(idTournament: number): Tournament | undefined {
     return this.getState('tournaments').find(tournament => tournament.id === idTournament);
   }

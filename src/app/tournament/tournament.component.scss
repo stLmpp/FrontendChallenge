@@ -1,3 +1,11 @@
 .phases {
   display: flex;
 }
+
+.actions {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  .mat-button-base:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+}
